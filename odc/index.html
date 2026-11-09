@@ -59,13 +59,20 @@
 
 <section style="padding-top:28px">
 
-  <!-- ==================== 체험 데모 (js/repair.js 의 initDemo): 탈락 6장 → Repair → 제자리에서 서서히 수리 ==================== -->
+  <!-- ==================== 체험 데모 (js/repair.js 의 initDemo): 탈락 타일 한 장씩 → Repair → 제자리에서 서서히 수리 → Next ==================== -->
   <article class="rs-block" id="demo">
-    <div class="rs-head"><span class="rs-num">TRY</span><h2>Repair the failed tiles</h2><span class="sub">masked SDEdit, step by step</span></div>
+    <div class="rs-head"><span class="rs-num">TRY</span><h2>Repair a failed tile</h2><span class="sub">masked SDEdit, step by step</span></div>
 
     <div class="rgrid" id="repair-demo" data-base="demo/" data-state="idle">
       <p class="rg-word fail" aria-live="polite">Fail</p>
-      <div class="rg-grid"></div>
+      <figure class="rg-tile rg-one">
+        <div class="rg-box">
+          <img class="before" alt="">
+          <canvas width="512" height="512" aria-hidden="true"></canvas>
+          <img class="hole" alt="">
+        </div>
+        <figcaption><span class="fam"></span><span class="st"></span></figcaption>
+      </figure>
 
       <div class="tbar">
         <div class="tbar-track">
@@ -77,9 +84,10 @@
       <p class="phase" aria-live="polite"></p>
       <div class="demo-controls">
         <button class="btn btn-dark btn-lg" data-act="run" type="button" disabled>Loading frames…</button>
-        <button class="btn btn-ghost" data-act="reset" type="button" disabled>Reset</button>
+        <button class="btn btn-ghost btn-lg" data-act="next" type="button" disabled>Next failed tile →</button>
       </div>
-      <p class="demo-note">Dark bar = steps where everything outside the dashed boxes is held to the original (t = 999 → 850);
+      <div class="rg-dots" role="group" aria-label="Failed tiles"></div>
+      <p class="demo-note">Dark bar = steps where everything outside the dashed box is held to the original (t = 999 → 850);
       light bar = whole tile denoised together. Drag the bar to scrub. Each frame is the model's estimate of the finished tile
       at that step, with its own noise estimate overlaid at reduced strength — replayed from the real sampling run
       (DDIM, 100 steps, 8 candidates per tile, the first passing one shown), not recomputed in your browser.</p>

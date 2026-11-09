@@ -1,4 +1,5 @@
-/* 마스크 SDEdit 수리 재생기 — 탈락 타일 6장을 한 화면에 두고, Repair 를 누르면 모두 제자리에서 서서히 수리된다.
+/* 마스크 SDEdit 수리 재생기 — 탈락 타일을 한 장씩 보여 주고, Repair 를 누르면 제자리에서 서서히 수리된다.
+   Next failed tile 을 누르면 다음 탈락 타일이 나온다 (아래 점 = 몇 번째 타일 · 고친 타일은 초록).
    브라우저에서 모델을 돌리지는 않는다 — 실제 샘플링(DDIM 100스텝) 때 저장한 스텝별 그림을 재생한다 (수리 영상과 같은 그림 규칙).
    데이터: odc/demo/  (우주데이터센터 저장소의 분석도구/export_web_repair_grid.py 가 만든다)
      demo.json            프레임별 t · 바깥이 풀리는 프레임(release) · 타일별 계열·폭·탈락 사유·구멍 밖 변화율
@@ -19,29 +20,31 @@ const Repair=(()=>{
 
   async function initDemo(root){
     const base=root.dataset.base,q=s=>root.querySelector(s);
-    const grid=q('.rg-grid'),word=q('.rg-word'),phase=q('.phase'),mark=q('.tbar-mark'),scrub=q('.tbar-input'),
-          runBtn=q('[data-act=run]'),resetBtn=q('[data-act=reset]');
+    const cv=q('canvas'),ctx=cv.getContext('2d'),before=q('.before'),hole=q('.hole'),fam=q('.fam'),st=q('.st'),
+          word=q('.rg-word'),phase=q('.phase'),mark=q('.tbar-mark'),scrub=q('.tbar-input'),dotsEl=q('.rg-dots'),
+          runBtn=q('[data-act=run]'),nextBtn=q('[data-act=next]');
     let d;
     try{d=await getJSON(base+'demo.json');}
     catch(e){phase.textContent='The demo could not load its data — the video below shows the same repair.';runBtn.textContent='Unavailable';return;}
-    const S=d.size,dur=durations(d),last=d.n-1;
-    const pcts=d.tiles.map(t=>t.changed_outside*100),lo=Math.min(...pcts).toFixed(1),hi=Math.max(...pcts).toFixed(1);
+    const S=d.size,dur=durations(d),last=d.n-1,total=d.tiles.length;
 
-    // 타일 칸 만들기
-    const cells=d.tiles.map(t=>{
-      const fig=document.createElement('figure');fig.className='rg-tile';
-      fig.innerHTML=`<div class="rg-box"><img class="before" src="${base}t${t.id}_before.png" alt="Failed ${t.family} tile, channel width ${t.width} px">`+
-        `<canvas width="512" height="512" aria-hidden="true"></canvas><img class="hole" src="${base}t${t.id}_hole.png" alt=""></div>`+
-        `<figcaption><span class="fam">${t.family} · ${t.width} px</span><span class="st"></span></figcaption>`;
-      grid.appendChild(fig);
-      const cv=fig.querySelector('canvas');
-      return {t,fig,cv,ctx:cv.getContext('2d'),hole:fig.querySelector('.hole'),st:fig.querySelector('.st'),sprite:null};
+    // 프레임 격자는 타일마다 한 번만 받는다 (지금 타일 + 다음 타일 미리)
+    const sprites=new Map();
+    const getSprite=t=>{if(!sprites.has(t.id))sprites.set(t.id,loadImg(`${base}t${t.id}_frames.webp`));return sprites.get(t.id);};
+
+    // 아래 점: 몇 번째 타일인지 · 고친 타일은 초록 (눌러서 바로 갈 수도 있다)
+    const dots=d.tiles.map((t,i)=>{
+      const b=document.createElement('button');b.type='button';b.className='rg-dot';
+      b.setAttribute('aria-label',`Failed tile ${i+1} of ${total}: ${t.family}, channel width ${t.width} px`);
+      b.addEventListener('click',()=>show(i));dotsEl.appendChild(b);return b;
     });
+    const count=document.createElement('span');count.className='rg-count';dotsEl.appendChild(count);
 
-    let pos=0,raf=0,state='idle',loaded=0;
-    function blit(c,j,alpha){
+    const done=new Set();let idx=0,cur=null,sprite=null,pos=0,raf=0,state='idle',token=0;
+    const pct=()=>(cur.changed_outside*100).toFixed(1);
+    function blit(j,alpha){
       const col=j%d.cols,row=Math.floor(j/d.cols);
-      c.ctx.globalAlpha=alpha;c.ctx.drawImage(c.sprite,col*S,row*S,S,S,0,0,c.cv.width,c.cv.height);
+      ctx.globalAlpha=alpha;ctx.drawImage(sprite,col*S,row*S,S,S,0,0,cv.width,cv.height);
     }
     function tAt(p){const j=Math.floor(p),f=p-j;return j<last?d.t[j]+(d.t[j+1]-d.t[j])*f:0;}
     function pOfT(t){                                   // 막대 위치(t) → 프레임 위치. t = 999 는 '점선 안이 노이즈' 상태, t = 0 은 결과
@@ -49,67 +52,76 @@ const Repair=(()=>{
       for(let j=1;j<last;j++){if(d.t[j+1]<=t){const g=d.t[j]-d.t[j+1];return g>0?j+(d.t[j]-t)/g:j;}}
       return last;
     }
-    function draw(p){                                   // 6장 모두 같은 프레임 위치 — 이웃 두 프레임을 섞어 부드럽게
+    function draw(p){                                   // 이웃 두 프레임을 섞어 부드럽게
       p=clamp(p,0,last);pos=p;const j=Math.floor(p),f=p-j;
-      cells.forEach(c=>{if(!c.sprite)return;blit(c,j,1);if(f>0&&j<last)blit(c,j+1,f);c.ctx.globalAlpha=1;});
-      const t=tAt(p),hole=1-clamp(p-(d.release-1),0,1);  // 바깥이 풀릴 때 점선이 서서히 사라짐
-      cells.forEach(c=>{c.hole.style.opacity=hole;});
+      if(sprite){blit(j,1);if(f>0&&j<last)blit(j+1,f);ctx.globalAlpha=1;}
+      const t=tAt(p);
+      hole.style.opacity=1-clamp(p-(d.release-1),0,1);  // 바깥이 풀릴 때 점선이 서서히 사라짐
       mark.style.left=(100*(999-t)/999)+'%';scrub.value=Math.round(999-t);
       if(state!=='done'&&state!=='idle')
         phase.innerHTML=t>d.t_release
-          ?`<b>① t = 999 → 850 · outside held.</b> Each box starts from noise. Outside it, the original tile is put back at every step, so the new channel has to fit its surroundings. <span class="t-now">t = ${Math.round(t)}</span>`
-          :`<b>② t &lt; 850 · outside released.</b> The whole tile is now denoised together, so each seam blends in; channels just outside a box may shift a little. <span class="t-now">t = ${Math.round(t)}</span>`;
+          ?`<b>① t = 999 → 850 · outside held.</b> The box starts from noise. Outside it, the original tile is put back at every step, so the new channel has to fit its surroundings. <span class="t-now">t = ${Math.round(t)}</span>`
+          :`<b>② t &lt; 850 · outside released.</b> The whole tile is now denoised together, so the seam blends in; channels just outside the box may shift a little. <span class="t-now">t = ${Math.round(t)}</span>`;
     }
+    function updCount(){count.textContent=`Tile ${idx+1} of ${total} · ${done.size} repaired`;}
     function setState(s){
       state=s;root.dataset.state=s;
       word.textContent=s==='idle'?'Fail':s==='done'?'Pass':'Masked SDEdit';
       word.className='rg-word '+(s==='idle'?'fail':s==='done'?'pass':'run');
       runBtn.textContent=s==='run'?'❚❚ Pause':s==='pause'?'▶ Resume':s==='done'?'↺ Repair again':'▶ Repair with masked SDEdit';
-      resetBtn.disabled=s==='idle';
-      cells.forEach(c=>{
-        c.st.className='st '+(s==='done'?'ok':s==='idle'?'bad':'');
-        c.st.textContent=s==='done'?`✓ passes · ${(c.t.changed_outside*100).toFixed(1)} % outside changed`
-                        :s==='idle'?`✕ ${c.t.why.join(' · ')}`:'repairing…';
-      });
-      if(s==='idle')phase.innerHTML=`Six generated tiles that failed the gates — in each one the channel breaks inside the dashed box. Press <b>Repair</b>: every box is erased and re-drawn by the same diffusion model, with no extra training and no hand editing.`;
-      if(s==='done')phase.innerHTML=`<b>③ All six pass</b> the same gates the training data passed. Only ${lo}–${hi} % of the pixels outside the boxes changed.`;
+      runBtn.className='btn btn-lg '+(s==='done'?'btn-ghost':'btn-dark');    // 다 고치면 다음 타일 버튼을 진하게
+      nextBtn.className='btn btn-lg '+(s==='done'?'btn-dark':'btn-ghost');
+      st.className='st '+(s==='done'?'ok':s==='idle'?'bad':'');
+      st.textContent=s==='done'?`✓ passes · ${pct()} % of outside pixels changed`:s==='idle'?`✕ ${cur.why.join(' · ')}`:'repairing…';
+      if(s==='idle')phase.innerHTML=`This generated <b>${cur.family}</b> tile failed the gates — its channel breaks inside the dashed box. Press <b>Repair</b>: the box is erased and re-drawn by the same diffusion model, with no extra training and no hand editing.`;
+      if(s==='done')phase.innerHTML=`<b>③ Passes</b> the same gates the training data passed. Only ${pct()} % of the pixels outside the box changed. Press <b>Next failed tile</b> for another one.`;
     }
     function stop(){if(raf)cancelAnimationFrame(raf);raf=0;}
+    function finish(){
+      setState('done');done.add(cur.id);dots[idx].classList.add('done');updCount();
+    }
     function play(from){
       stop();let p=from,prev=performance.now();
       const step=now=>{
         const dt=clamp(now-prev,0,100);prev=now;           // 탭이 가려졌다 돌아와도 한 번에 건너뛰지 않게. 첫 프레임 시각은 클릭보다 이를 수 있어 음수를 막음
         p+=dt/dur[clamp(Math.floor(p),0,last-1)];
-        if(p>=last){draw(last);raf=0;setState('done');return;}
+        if(p>=last){draw(last);raf=0;finish();return;}
         draw(p);raf=requestAnimationFrame(step);
       };
       raf=requestAnimationFrame(step);
     }
-    function reset(){stop();setState('idle');draw(0);}
+
+    async function show(i){
+      const my=++token;stop();idx=i;cur=d.tiles[i];sprite=null;
+      before.src=`${base}t${cur.id}_before.png`;before.alt=`Failed ${cur.family} tile, channel width ${cur.width} px`;
+      hole.src=`${base}t${cur.id}_hole.png`;ctx.clearRect(0,0,cv.width,cv.height);
+      fam.textContent=`${cur.family} · channel width ${cur.width} px`;
+      dots.forEach((b,k)=>{b.classList.toggle('cur',k===i);b.setAttribute('aria-current',k===i?'true':'false');});updCount();
+      setState('idle');draw(0);
+      runBtn.disabled=true;scrub.disabled=true;runBtn.textContent='Loading frames…';
+      let im;
+      try{im=await getSprite(cur);}catch(e){if(my===token)runBtn.textContent='Frames failed to load';return;}
+      if(my!==token)return;                              // 그 사이 다른 타일로 넘어갔으면 버림
+      sprite=im;runBtn.disabled=false;scrub.disabled=false;setState('idle');draw(0);
+      getSprite(d.tiles[(i+1)%total]).catch(()=>{});     // 다음 타일 미리 받기
+    }
 
     runBtn.addEventListener('click',()=>{
-      if(loaded<cells.length)return;
+      if(!sprite)return;
       if(state==='run'){stop();setState('pause');return;}
       const from=state==='pause'?pos:0;
       setState('run');draw(from);play(from);
     });
-    resetBtn.addEventListener('click',reset);
+    nextBtn.addEventListener('click',()=>show((idx+1)%total));
     scrub.addEventListener('input',()=>{
-      if(loaded<cells.length)return;stop();
+      if(!sprite)return;stop();
       const p=pOfT(999-(+scrub.value));
-      if(p>=last){draw(last);setState('done');return;}
+      if(p>=last){draw(last);finish();return;}
       setState('pause');draw(p);
     });
 
-    // 프레임 받기 (6장 다 받아야 재생 가능)
-    setState('idle');runBtn.disabled=true;scrub.disabled=true;runBtn.textContent=`Loading frames… 0 / ${cells.length}`;
-    await Promise.all(cells.map(c=>loadImg(`${base}t${c.t.id}_frames.webp`).then(im=>{
-      c.sprite=im;loaded++;
-      if(state==='idle'){blit(c,0,1);c.ctx.globalAlpha=1;}
-      if(loaded<cells.length)runBtn.textContent=`Loading frames… ${loaded} / ${cells.length}`;
-    }).catch(()=>{})));
-    if(loaded<cells.length){runBtn.textContent='Frames failed to load';return;}
-    runBtn.disabled=false;scrub.disabled=false;setState('idle');draw(0);
+    nextBtn.disabled=false;
+    show(0);
   }
 
   return {initDemo};

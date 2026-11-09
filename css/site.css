@@ -214,19 +214,19 @@ section{max-width:1150px;margin:0 auto;padding:120px 24px 60px}
 .gallery img:hover{opacity:.85}
 .gallery figcaption{font-size:.8rem;color:var(--ink-soft);padding:10px 12px;font-weight:600}
 
-/* ---------- REPAIR DEMO (탈락 6장 격자 → 제자리에서 수리) ---------- */
+/* ---------- REPAIR DEMO (탈락 타일 한 장씩 → 제자리에서 수리 → 다음 타일) ---------- */
 .rgrid{max-width:900px;margin:6px auto 0;text-align:center}
 .rgrid .rg-word{font-size:1.9rem;font-weight:800;letter-spacing:-.01em;margin:0 0 16px;line-height:1.2;transition:color .3s}  /* .rs-block p 보다 우선 */
 .rg-word.fail{color:var(--fail)}
 .rg-word.run{color:var(--accent-deep)}
 .rg-word.pass{color:var(--pass)}
-.rg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rg-tile.rg-one{max-width:430px;margin:0 auto}   /* .rg-tile{margin:0} 보다 우선 — 가운데 정렬 */
 .rg-tile{margin:0;min-width:0}
 .rg-box{position:relative;aspect-ratio:1;border:1px solid var(--line);background:#fff;transition:border-color .4s,box-shadow .4s}
 .rg-box > *{position:absolute;inset:0;width:100%;height:100%;display:block}
 .rg-box .hole{pointer-events:none}
 .rgrid[data-state=done] .rg-box{border-color:var(--pass);box-shadow:0 0 0 2px var(--pass)}
-.rg-tile figcaption{display:flex;flex-direction:column;gap:1px;margin-top:7px;font-size:.76rem;line-height:1.35}
+.rg-tile figcaption{display:flex;flex-direction:column;gap:2px;margin-top:9px;font-size:.84rem;line-height:1.35}
 .rg-tile .fam{font-weight:700;color:var(--ink-soft)}
 .rg-tile .st{color:var(--ink-faint);font-weight:600;min-height:1.35em}
 .rg-tile .st.bad{color:var(--fail)}
@@ -246,6 +246,11 @@ section{max-width:1150px;margin:0 auto;padding:120px 24px 60px}
 .phase b{color:var(--ink)}
 .phase .t-now{display:inline-block;min-width:4.6em;font-weight:800;color:var(--accent-deep);font-variant-numeric:tabular-nums}
 .demo-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center}
+.rg-dots{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:9px;margin-top:18px}
+.rg-dot{width:13px;height:13px;padding:0;border-radius:50%;border:2px solid var(--fail);background:transparent;cursor:pointer;transition:background .3s,border-color .3s}
+.rg-dot.done{border-color:var(--pass);background:var(--pass)}
+.rg-dot.cur{outline:2px solid var(--ink);outline-offset:2px}
+.rg-count{margin-left:8px;font-size:.76rem;font-weight:700;color:var(--ink-faint)}
 .rgrid .demo-note{font-size:.78rem;color:var(--ink-faint);margin:18px auto 0;line-height:1.45;max-width:720px}
 
 /* ---------- TIMELINE (research log) ---------- */
@@ -363,9 +368,9 @@ footer a{color:inherit}
   .stat .big{font-size:1.4rem;white-space:normal}
   .eyebrow{font-size:.7rem;letter-spacing:.12em}
   .proj-body{padding:18px 20px 20px}
-  .rg-grid{grid-template-columns:repeat(2,1fr);gap:14px}   /* 폰: 2열 × 3줄 */
   .rgrid .rg-word{font-size:1.5rem}
-  .rg-tile figcaption{font-size:.7rem}
+  .rg-tile figcaption{font-size:.78rem}
+  .demo-controls .btn-lg{padding:12px 18px;font-size:.92rem}
   .tbar-labels .l850{display:none}
   .nav-links{
     position:absolute;top:calc(100% + 10px);left:0;right:0;
