@@ -1,0 +1,166 @@
+{
+ "cols": 10,
+ "size": 256,
+ "n": 65,
+ "t": [
+  999,
+  999,
+  999,
+  988,
+  978,
+  968,
+  958,
+  948,
+  938,
+  928,
+  918,
+  908,
+  898,
+  888,
+  877,
+  867,
+  857,
+  847,
+  837,
+  827,
+  817,
+  807,
+  797,
+  787,
+  777,
+  766,
+  756,
+  746,
+  736,
+  726,
+  716,
+  706,
+  696,
+  686,
+  676,
+  666,
+  655,
+  645,
+  635,
+  625,
+  615,
+  605,
+  595,
+  575,
+  555,
+  534,
+  514,
+  494,
+  474,
+  454,
+  433,
+  413,
+  393,
+  373,
+  353,
+  312,
+  272,
+  232,
+  191,
+  151,
+  110,
+  70,
+  30,
+  0,
+  0
+ ],
+ "release": 17,
+ "t_release": 850,
+ "tiles": [
+  {
+   "id": 54,
+   "family": "serpentine",
+   "width": 17,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "pass_after": true,
+   "changed_outside": 0.0165
+  },
+  {
+   "id": 42,
+   "family": "serpentine",
+   "width": 15,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "pass_after": true,
+   "changed_outside": 0.034
+  },
+  {
+   "id": 377,
+   "family": "serpentine",
+   "width": 17,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "pass_after": true,
+   "changed_outside": 0.0104
+  },
+  {
+   "id": 163,
+   "family": "serpentine",
+   "width": 13,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "pass_after": true,
+   "changed_outside": 0.0182
+  },
+  {
+   "id": 7,
+   "family": "serpentine",
+   "width": 11,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "pass_after": true,
+   "changed_outside": 0.0303
+  },
+  {
+   "id": 1784,
+   "family": "spiral",
+   "width": 9,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "pass_after": true,
+   "changed_outside": 0.0304
+  }
+ ]
+}

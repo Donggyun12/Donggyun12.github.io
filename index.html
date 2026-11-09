@@ -8,317 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-/* ============================================================
-   MONOCHROME PORTFOLIO — pure HTML/CSS/JS, GitHub Pages ready
-   수정할 곳은 전부 [EDIT] 주석으로 표시해뒀습니다.
-   그림은 img/ 폴더에 파일로 둡니다 (index.html 안에 base64 로 넣지 않음).
-   ============================================================ */
-:root{
-  --bg:#efefef;
-  --bg-soft:#f7f7f7;
-  --ink:#111111;
-  --ink-soft:#444444;
-  --ink-faint:#8a8a8a;
-  --card:#ffffff;
-  --line:#dcdcdc;
-  --shadow:0 10px 30px rgba(0,0,0,.08);
-  --shadow-sm:0 4px 14px rgba(0,0,0,.06);
-  --radius:18px;
-  --pill:999px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  background:linear-gradient(180deg,#ececec 0%,#f4f4f4 40%,#ededed 100%);
-  color:var(--ink);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-::selection{background:var(--ink);color:#fff}
-
-/* ---------- NAV (floating pill bar) ---------- */
-.nav-wrap{
-  position:fixed;top:18px;left:50%;transform:translateX(-50%);
-  width:min(1150px,calc(100% - 32px));
-  z-index:100;
-}
-nav{
-  display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(90deg,#d9d9d9,#cfcfcf 55%,#c9c9c9);
-  border:1px solid rgba(255,255,255,.6);
-  border-radius:22px;
-  padding:12px 22px;
-  box-shadow:0 12px 28px rgba(0,0,0,.18);
-  backdrop-filter:blur(6px);
-}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
-.brand-mark{
-  width:32px;height:32px;border-radius:10px;background:var(--ink);color:#fff;
-  display:grid;place-items:center;font-size:.85rem;font-weight:800;
-}
-.brand-divider{width:1px;height:22px;background:rgba(0,0,0,.25);margin:0 4px}
-.brand-lab{height:28px;width:auto;display:block}
-@media (max-width:760px){.brand-divider,.brand-lab{display:none}}
-.nav-links{display:flex;gap:6px;list-style:none}
-.nav-links a{
-  display:block;padding:8px 18px;border-radius:var(--pill);
-  color:var(--ink-soft);text-decoration:none;font-weight:600;font-size:.92rem;
-  transition:background .25s,color .25s;
-}
-.nav-links a:hover{background:rgba(0,0,0,.07);color:var(--ink)}
-.nav-links a.active{background:var(--ink);color:#fff}
-.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink)}
-
-/* ---------- SECTION SHELL ---------- */
-section{max-width:1150px;margin:0 auto;padding:120px 24px 60px}
-.sec-title{font-size:clamp(2rem,4.5vw,2.9rem);font-weight:700;text-align:center;letter-spacing:-.02em}
-.sec-rule{width:56px;height:3px;background:var(--ink);margin:18px auto 14px;border-radius:2px}
-.sec-sub{text-align:center;color:var(--ink-soft);max-width:640px;margin:0 auto 48px}
-
-/* ---------- HERO ---------- */
-#home{
-  min-height:100vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;
-  position:relative;overflow:hidden;padding-top:140px;
-}
-.hero-name{
-  font-size:clamp(3rem,9vw,5.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;
-}
-.hero-tag{margin-top:26px;font-size:clamp(1rem,2.2vw,1.3rem);color:var(--ink-soft);max-width:640px}
-.hero-cta{
-  margin-top:44px;display:inline-block;
-  background:var(--ink);color:#fff;text-decoration:none;
-  padding:16px 34px;border-radius:var(--pill);font-weight:700;font-size:1rem;
-  box-shadow:0 14px 30px rgba(0,0,0,.25);
-  transition:transform .25s,box-shadow .25s;
-}
-.hero-cta:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
-/* floating shapes like the reference */
-.float-shape{position:absolute;background:#dedede;box-shadow:var(--shadow-sm);animation:drift 9s ease-in-out infinite}
-.shape-a{width:96px;height:96px;border-radius:50%;top:18%;left:12%}
-.shape-b{width:130px;height:130px;border-radius:14px;bottom:16%;right:12%;transform:rotate(-8deg);animation-delay:-4s}
-@keyframes drift{0%,100%{translate:0 0}50%{translate:0 -22px}}
-
-/* ---------- ABOUT ---------- */
-.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center;margin-top:20px}
-.about-text p{color:var(--ink-soft);margin-bottom:22px;font-size:1.02rem}
-.about-text strong{color:var(--ink)}
-.about-photo{
-  width:min(300px,80%);aspect-ratio:1;border-radius:50%;
-  object-fit:cover;object-position:center top;
-  margin:0 auto;display:block;
-  box-shadow:var(--shadow);background:#ddd;
-}
-
-/* ---------- RESEARCH ---------- */
-.research-badge{
-  position:absolute;margin:14px;z-index:2;
-  background:var(--ink);color:#fff;font-size:.75rem;font-weight:700;
-  padding:6px 14px;border-radius:var(--pill);letter-spacing:.03em;
-}
-.rs-banner{
-  position:relative;background:var(--card);border-radius:var(--radius);overflow:hidden;
-  box-shadow:var(--shadow-sm);margin-bottom:28px;
-}
-.rs-banner img{width:100%;height:360px;object-fit:cover;object-position:center;display:block;background:#000;cursor:zoom-in}
-.rs-banner-text{padding:30px 32px 32px}
-.rs-banner-text h3{font-size:1.35rem;font-weight:700;letter-spacing:-.01em;margin-bottom:12px;line-height:1.35}
-.rs-banner-text p{color:var(--ink-soft);font-size:.97rem;margin-bottom:18px}
-.rs-meta{font-size:.82rem;color:var(--ink-faint);font-weight:600;margin-bottom:10px;letter-spacing:.02em}
-.tag-row{display:flex;flex-wrap:wrap;gap:8px}
-.tag{
-  background:var(--bg-soft);border:1px solid var(--line);
-  border-radius:var(--pill);padding:4px 13px;font-size:.76rem;font-weight:600;color:var(--ink-soft);
-}
-
-.rs-block{
-  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow-sm);
-  padding:34px 34px 36px;margin-bottom:28px;
-}
-.rs-head{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-.rs-num{
-  font-size:.78rem;font-weight:800;letter-spacing:.12em;color:#fff;background:var(--ink);
-  padding:4px 10px;border-radius:6px;
-}
-.rs-head h4{font-size:1.3rem;font-weight:700;letter-spacing:-.01em}
-.rs-head span.sub{color:var(--ink-faint);font-weight:600;font-size:.95rem}
-.rs-block p{color:var(--ink-soft);font-size:.97rem;margin-bottom:14px}
-.rs-block ul{list-style:none;display:grid;gap:10px;margin:6px 0 4px}
-.rs-block li{
-  position:relative;padding-left:22px;color:var(--ink-soft);font-size:.95rem;
-}
-.rs-block li::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--ink)}
-.rs-block li strong{color:var(--ink)}
-
-/* method steps */
-.step-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:8px}
-.step{
-  border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px;background:var(--bg-soft);
-  display:flex;flex-direction:column;gap:12px;
-}
-.step-head{display:flex;align-items:center;gap:10px}
-.step-head .n{
-  width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;
-  display:grid;place-items:center;font-size:.8rem;font-weight:800;flex:none;
-}
-.step-head h5{font-size:1.02rem;font-weight:700}
-.step img{width:100%;display:block;border-radius:8px;background:#fff;border:1px solid var(--line);cursor:zoom-in}
-.step p{font-size:.9rem;margin:0}
-.repair-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.repair-strip figure{margin:0;text-align:center}
-.repair-strip img{width:100%;aspect-ratio:1;object-fit:cover;cursor:default}
-.repair-strip figcaption{font-size:.74rem;color:var(--ink-faint);font-weight:600;margin-top:5px;line-height:1.3}
-.assembly{display:grid;grid-template-columns:1fr;gap:10px}
-
-/* results */
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:6px 0 24px}
-.stat{
-  background:var(--bg-soft);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
-}
-.stat .big{font-size:1.65rem;font-weight:800;letter-spacing:-.02em;line-height:1.1;white-space:nowrap}
-.stat .big small{font-size:.95rem;font-weight:700;color:var(--ink-faint)}
-.stat .lab{font-size:.8rem;color:var(--ink-soft);margin-top:8px;line-height:1.35}
-.fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:4px 0 20px}
-.fig{margin:0}
-.fig img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:zoom-in}
-.fig figcaption{font-size:.82rem;color:var(--ink-faint);margin-top:8px;line-height:1.4}
-
-/* korean poster figures gallery */
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
-.gallery figure{margin:0;background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.gallery img{width:100%;height:170px;object-fit:cover;object-position:left top;display:block;cursor:zoom-in;background:#fff;transition:opacity .25s}
-.gallery img:hover{opacity:.85}
-.gallery figcaption{font-size:.8rem;color:var(--ink-soft);padding:10px 12px;font-weight:600}
-
-/* ---------- TIMELINE (research log) ---------- */
-.timeline{max-width:760px;margin:10px auto 0;position:relative;padding-left:32px}
-.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line)}
-.tl-item{position:relative;margin-bottom:34px}
-.tl-item::before{
-  content:"";position:absolute;left:-31px;top:6px;width:16px;height:16px;border-radius:50%;
-  background:var(--ink);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--line);
-}
-.tl-date{font-size:.82rem;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em}
-.tl-item h3{font-size:1.1rem;font-weight:700;margin:6px 0 8px}
-.tl-item p{color:var(--ink-soft);font-size:.94rem}
-
-/* ---------- AI STUDY ---------- */
-.study-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
-  max-width:820px;margin:0 auto;
-}
-.study-card{
-  background:var(--card);border-radius:var(--radius);overflow:hidden;
-  box-shadow:var(--shadow-sm);display:flex;flex-direction:column;
-  border:1px solid transparent;
-  transition:transform .25s,box-shadow .25s,border-color .25s;
-}
-.study-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--ink)}
-.study-icon{
-  height:120px;background:linear-gradient(135deg,#1c1c1c,#4a4a4a);
-  display:grid;place-items:center;color:#fff;
-  font-size:1.7rem;font-weight:800;letter-spacing:.05em;
-}
-.study-body{padding:28px 26px 30px;display:flex;flex-direction:column;flex:1}
-.study-body h3{font-size:1.15rem;font-weight:700;margin-bottom:12px;letter-spacing:-.01em}
-.study-body p{color:var(--ink-soft);font-size:.93rem;margin-bottom:22px;flex:1}
-.study-body .btn{align-self:flex-start}
-.btn{
-  text-decoration:none;font-weight:700;font-size:.86rem;
-  padding:11px 20px;border-radius:var(--pill);transition:all .25s;text-align:center;
-}
-.btn-dark{background:var(--ink);color:#fff}
-.btn-dark:hover{opacity:.82}
-.btn-ghost{border:1.5px solid var(--ink);color:var(--ink)}
-.btn-ghost:hover{background:var(--ink);color:#fff}
-
-/* ---------- LIGHTBOX ---------- */
-.lightbox{
-  position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;
-  display:none;align-items:center;justify-content:center;flex-direction:column;
-}
-.lightbox.open{display:flex}
-.lightbox img{max-width:92vw;max-height:82vh;border-radius:8px;background:#fff}
-.lightbox-caption{color:#ddd;margin-top:14px;font-size:.95rem;max-width:90vw;text-align:center}
-.lightbox-close{
-  position:absolute;top:20px;right:28px;color:#fff;font-size:2rem;
-  background:none;border:none;cursor:pointer;line-height:1;
-}
-.lightbox-nav{
-  position:absolute;top:50%;transform:translateY(-50%);
-  background:rgba(255,255,255,.12);border:none;color:#fff;
-  font-size:1.6rem;width:48px;height:48px;border-radius:50%;cursor:pointer;
-}
-.lightbox-nav:hover{background:rgba(255,255,255,.25)}
-.lightbox-prev{left:20px}
-.lightbox-next{right:20px}
-
-/* ---------- CONTACT ---------- */
-#contact{padding-bottom:40px}
-.contact-panel{
-  background:var(--bg-soft);border-radius:26px;box-shadow:var(--shadow-sm);
-  padding:80px 30px;text-align:center;
-}
-.contact-mark{
-  width:80px;height:80px;border-radius:22px;background:var(--ink);color:#fff;
-  display:grid;place-items:center;margin:0 auto 34px;font-size:1.6rem;font-weight:800;
-}
-.contact-quote{color:var(--ink-soft);font-style:italic;margin:22px auto 44px;max-width:520px}
-.social-row{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
-.social-btn{
-  width:58px;height:58px;border-radius:50%;background:var(--card);
-  box-shadow:var(--shadow-sm);display:grid;place-items:center;
-  color:var(--ink);text-decoration:none;transition:transform .25s,box-shadow .25s;
-}
-.social-btn:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.social-btn svg{width:24px;height:24px;fill:currentColor}
-.email-text{
-  display:inline-flex;align-items:center;gap:10px;margin-top:28px;
-  background:var(--card);border:1px solid var(--line);border-radius:var(--pill);
-  padding:12px 24px;font-family:inherit;font-size:.95rem;font-weight:600;
-  color:var(--ink);cursor:pointer;transition:border-color .25s,box-shadow .25s;
-}
-.email-text:hover{border-color:var(--ink);box-shadow:var(--shadow-sm)}
-.copy-hint{font-size:.75rem;font-weight:600;color:var(--ink-faint)}
-footer{text-align:center;padding:34px;color:var(--ink-faint);font-size:.85rem}
-
-/* ---------- SCROLL REVEAL ---------- */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .float-shape{animation:none}
-  html{scroll-behavior:auto}
-}
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width:900px){
-  .about-grid{grid-template-columns:1fr;gap:40px}
-  .about-photo{order:-1}
-  .stat-row{grid-template-columns:repeat(2,1fr)}
-  .fig-grid{grid-template-columns:1fr}
-  .rs-banner img{height:260px}
-}
-@media (max-width:640px){
-  .study-grid,.step-grid,.gallery{grid-template-columns:1fr}
-  .rs-block{padding:24px 20px 26px}
-  .rs-banner-text{padding:22px 20px 24px}
-  .rs-banner img{height:200px}
-  .repair-strip{grid-template-columns:repeat(2,1fr)}
-  .stat .big{font-size:1.4rem;white-space:normal}
-  .shape-b{display:none}   /* 폰 폭에서는 떠다니는 사각형이 소개 문장을 가려서 숨김 */
-  .nav-links{
-    position:absolute;top:calc(100% + 10px);left:0;right:0;
-    flex-direction:column;background:#d9d9d9;border-radius:18px;
-    padding:12px;box-shadow:0 16px 32px rgba(0,0,0,.2);
-    display:none;
-  }
-  .nav-links.open{display:flex}
-  .nav-toggle{display:block}
-}
-</style>
+<!-- 스타일은 css/site.css 한 곳 (연구 상세 페이지 odc/index.html 과 같이 씀) -->
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 
@@ -326,31 +17,47 @@ footer{text-align:center;padding:34px;color:var(--ink-faint);font-size:.85rem}
 <div class="nav-wrap">
   <nav>
     <!-- [EDIT] 이름/이니셜 -->
-    <div class="brand">
+    <a class="brand" href="#home">
       <span class="brand-mark">AD</span>An Donggyun
       <span class="brand-divider" aria-hidden="true"></span>
       <img class="brand-lab" src="img/idealab_logo.png" alt="IDEA Lab, Hanyang University">
-    </div>
+    </a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
     <ul class="nav-links">
       <li><a href="#home" class="active">Home</a></li>
+      <li><a href="odc/">Research</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
       <li><a href="#study">AI Study</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 </div>
 
-<!-- ==================== HERO ==================== -->
+<!-- ==================== HERO: 왼쪽 프로필 · 오른쪽 진행 중인 연구 (누르면 odc/ 데모 사이트) ==================== -->
 <section id="home">
-  <div class="float-shape shape-a" aria-hidden="true"></div>
-  <div class="float-shape shape-b" aria-hidden="true"></div>
-  <!-- [EDIT] 영문 이름 -->
-  <h1 class="hero-name">An Donggyun</h1>
-  <p class="hero-tag">Wanna become a Physical-AI Engineer — where
-    <strong>mobility meets mechanics, control, and machine learning.</strong></p>
-  <a href="#about" class="hero-cta">Root access to me</a>
+  <div class="hero-grid">
+    <div class="hero-profile">
+      <!-- [EDIT] 이름·소속·한 줄 소개 -->
+      <p class="eyebrow">Undergraduate researcher · IDEA Lab</p>
+      <h1 class="hero-name">An Donggyun</h1>
+      <p class="hero-sub">Robotics · Hanyang ERICA</p>
+      <p class="hero-tag">Wanna become a Physical-AI Engineer — where
+        <strong>mobility meets mechanics, control, and machine learning.</strong></p>
+      <a class="link-arrow" href="#about">Root access to me</a>
+    </div>
+
+    <!-- [EDIT] 진행 중인 연구 — 그림 한 장 + 짧은 글 -->
+    <a class="proj-link" href="odc/">
+      <img src="img/hero_ai1.jpg" alt="Orbital data-center satellite above Earth — deployable radiator with generated cooling-channel tiles between two solar arrays (Blender render)">
+      <div class="proj-body">
+        <p class="eyebrow">Ongoing research</p>
+        <h2>Space Radiator Channels</h2>
+        <p>A diffusion model designs cooling-channel tiles for orbital data-center radiators —
+          and repairs the ones that fail instead of throwing them away.</p>
+        <span class="proj-more">See the project &amp; demo →</span>
+      </div>
+    </a>
+  </div>
 </section>
 
 <!-- ==================== ABOUT ==================== -->
@@ -379,176 +86,6 @@ footer{text-align:center;padding:34px;color:var(--ink-faint);font-size:.85rem}
     <div class="reveal">
       <!-- [EDIT] 프로필 사진: img/profile.jpg -->
       <img src="img/profile.jpg" class="about-photo" alt="An Donggyun">
-    </div>
-  </div>
-</section>
-
-<!-- ==================== RESEARCH ==================== -->
-<section id="research">
-  <h2 class="sec-title reveal">Research</h2>
-  <div class="sec-rule reveal"></div>
-  <p class="sec-sub reveal">Generative design of flow channels for deployable space radiators —
-  undergraduate research at IDEA Lab, Hanyang University ERICA (Aug 2026 – present).
-  Laid out the way the poster is: why → how → results → what's next.</p>
-
-  <!-- 배너 -->
-  <article class="rs-banner reveal">
-    <div class="research-badge">Ongoing Research · IDEA Lab · poster in preparation</div>
-    <img src="img/hero_zfold.jpg" alt="Z-fold deployable radiator between two solar arrays — concept render" onclick="openLightbox(0)">
-    <div class="rs-banner-text">
-      <div class="rs-meta">IDEA Lab, Hanyang University ERICA · Aug 2026 – present</div>
-      <h3>Conditional Diffusion Generation and Inpainting Repair of Flow-Channel Tiles for Deployable Space Radiators</h3>
-      <p>MW-class orbital data centers can only reject heat by radiation, so they need
-      thousands of square metres of radiator launched folded and deployed as tiled panels.
-      The cooling channels inside those tiles set the radiator's thermal resistance,
-      pressure drop and mass — and every kilogram costs about $3,400 to launch.
-      I build the generative half of this design loop: a diffusion model conditioned on
-      channel <em>family</em> and <em>width</em>, geometric gates that judge every tile,
-      and a training-free inpainting repair that recovers failed tiles so they can be
-      joined into foldable panels.</p>
-      <div class="tag-row">
-        <span class="tag">Conditional DDPM</span><span class="tag">SDF Representation</span>
-        <span class="tag">Inpainting · SDEdit</span><span class="tag">Boundary-weighted Loss</span>
-        <span class="tag">PyTorch</span><span class="tag">Generative Design</span>
-      </div>
-    </div>
-  </article>
-
-  <!-- 01 WHY -->
-  <article class="rs-block reveal">
-    <div class="rs-head"><span class="rs-num">01</span><h4>Why</h4><span class="sub">the problem</span></div>
-    <ul>
-      <li><strong>Radiation is the only exit for heat in orbit.</strong> A megawatt-class data center needs on the order of 2,500 m² of radiator, so panels are built from many tiles, folded for launch and deployed in space.</li>
-      <li><strong>Channel geometry is the lever.</strong> Lower channel thermal resistance raises the radiator temperature, and radiator area scales with T⁻⁴; pressure drop sets pump power; a large area will be punctured by micrometeoroids, so the layout must stay connected when a branch is lost.</li>
-      <li><strong>Existing generative design fixes the topology.</strong> HeatGen-style methods describe fin shapes with Bézier control-point vectors, so the channel topology cannot change — and samples that fail a check are simply discarded.</li>
-      <li><strong>Two ideas in this work:</strong> ① a diffusion model <em>conditioned on channel family and width</em>, so tiles can be ordered to spec and joined; ② <em>repair</em> failed tiles by inpainting instead of discarding them.</li>
-    </ul>
-  </article>
-
-  <!-- 02 HOW -->
-  <article class="rs-block reveal">
-    <div class="rs-head"><span class="rs-num">02</span><h4>How</h4><span class="sub">the pipeline in four steps</span></div>
-    <div class="step-grid">
-
-      <div class="step">
-        <div class="step-head"><span class="n">1</span><h5>Training data</h5></div>
-        <img src="img/families.png" alt="Five training families" onclick="openLightbox(1)">
-        <img src="img/sdf_demo.png" alt="Binary mask and its signed-distance field" onclick="openLightbox(10)">
-        <p>Five procedural generators — serpentine, parallel, pin-fin, spiral, web — produce
-        2,000 tiles each with channel widths of 7–21 px. Only shapes that pass the gates are kept,
-        and each is stored as a 256 × 256 truncated signed-distance field (SDF): the model learns a
-        smooth distance-to-wall image rather than a hard 0/1 mask, and the zero level set gives the
-        channel boundary back.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-head"><span class="n">2</span><h5>Conditional diffusion</h5></div>
-        <img src="img/generated.png" alt="Tiles generated by the conditional diffusion model" onclick="openLightbox(2)">
-        <p>A DDPM U-Net (v-prediction, T = 1000, cosine schedule) is conditioned on a family label
-        and a channel-width map, with 10 % condition dropout. Sampling uses 100 DDIM steps;
-        changing the condition yields a new tile of the requested family and width.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-head"><span class="n">3</span><h5>Gates + repair</h5></div>
-        <div class="repair-strip">
-          <figure><img src="img/repair_0.png" alt="Failed tile"><figcaption>generated tile<br>fails a gate</figcaption></figure>
-          <figure><img src="img/repair_1.png" alt="Defect located"><figcaption>defect located from<br>skeleton endpoints</figcaption></figure>
-          <figure><img src="img/repair_2.jpg" alt="Hole re-drawn from noise"><figcaption>hole re-drawn from noise,<br>outside held to original</figcaption></figure>
-          <figure><img src="img/repair_3.png" alt="Repaired tile"><figcaption>repaired tile<br>passes re-judgement</figcaption></figure>
-        </div>
-        <p>Every generated tile is judged by the same gates as the training data — inlet→outlet
-        connectivity, ports, isolated islands, width ≥ 4 px, wall thickness, volume fraction and a
-        per-family topology check — plus a memorisation check (IoU ≥ 0.95 to any training tile).
-        A failed tile is not discarded: the defect is boxed, the box is re-drawn from pure noise while
-        the rest is held to the original until t = 850, then everything is denoised together so the
-        seam blends (<em>masked SDEdit</em>, 8 candidates, no extra training).</p>
-      </div>
-
-      <div class="step">
-        <div class="step-head"><span class="n">4</span><h5>Panel assembly</h5></div>
-        <div class="assembly">
-          <img src="img/panel_1x4.png" alt="1x4 panel assembled from four generated tiles" onclick="openLightbox(3)">
-          <img src="img/deploy_3d.jpg" alt="Foldable 1x4 radiator panel, 3D concept" onclick="openLightbox(4)">
-        </div>
-        <p>Tiles of the same width share port positions, so four of them join into a 1 × 4 panel
-        whose tile borders become the fold lines (hinges). Pairs of different width are bridged by
-        inpainting a strip across the joint (Blended diffusion with a soft mask). Panels are re-checked
-        with the same gates.</p>
-      </div>
-
-    </div>
-  </article>
-
-  <!-- 03 RESULTS -->
-  <article class="rs-block reveal">
-    <div class="rs-head"><span class="rs-num">03</span><h4>Results</h4><span class="sub">what the numbers say so far</span></div>
-    <div class="stat-row">
-      <div class="stat"><div class="big">10,000</div><div class="lab">training tiles — 5 families × 2,000, all gate-passing</div></div>
-      <div class="stat"><div class="big">91.3 <small>→</small> 97.1 <small>%</small></div><div class="lab">gate pass rate, base model → boundary-weighted loss (1,000 tiles per family)</div></div>
-      <div class="stat"><div class="big">92.0 <small>→</small> 99.8 <small>%</small></div><div class="lab">pass rate after masked-SDEdit repair (640-tile evaluation set)</div></div>
-      <div class="stat"><div class="big">0 <small>px</small></div><div class="lab">seam offset on same-width 1 × 4 panels (7 of 7), no inpainting needed</div></div>
-    </div>
-    <div class="fig-grid">
-      <figure class="fig">
-        <img src="img/passrate_en.png" alt="Gate pass rate per family" onclick="openLightbox(5)">
-        <figcaption>Gate pass rate per family. The base model already obeys both conditions; serpentine and spiral carry most failures. Weighting the loss near channel boundaries (w = 1 + 14·exp(−d²/2σ²), σ = 1 px, 15 extra epochs) lifts the total from 91.3 to 97.1 %.</figcaption>
-      </figure>
-      <figure class="fig">
-        <img src="img/pairs_en.png" alt="Same-seed pairs: plain MSE fails, boundary-weighted passes" onclick="openLightbox(6)">
-        <figcaption>Same seed, same width, same 50 epochs from scratch — only the loss differs. Red marks what the gates flagged. Over 5,000 tiles the plain-MSE model fails 790, the boundary-weighted one 188 (84.2 → 96.2 %).</figcaption>
-      </figure>
-    </div>
-    <ul>
-      <li><strong>Repair recovers what hole-filling cannot.</strong> Masked SDEdit fixes 98 % of the 51 failed tiles while changing only 5.6 % of the pixels outside the hole. Five hole-only inpainting baselines (Blended, RePaint, DDNM, DPS, CoPaint) stall at 57–67 % because for 17 tiles the fix lies <em>outside</em> the hole — masked SDEdit repairs all 17.</li>
-      <li><strong>The weight's shape matters.</strong> Across a 21-run sweep, the peak height w<sub>b</sub> drives the pass rate while the width σ (and the epoch count) drives memorisation of training tiles; σ = 1 px keeps copies at the base-model level.</li>
-      <li><strong>Panels assemble.</strong> Same-width 1 × 4 panels need no inpainting; mixed-width joints bridged by inpainting are 100 % connected with at most 1 px kink.</li>
-    </ul>
-  </article>
-
-  <!-- 04 CONCLUSION / NEXT -->
-  <article class="rs-block reveal">
-    <div class="rs-head"><span class="rs-num">04</span><h4>Conclusion &amp; next</h4><span class="sub">generate → judge → repair</span></div>
-    <ul>
-      <li><strong>A family- and width-conditioned diffusion model plus a repair step</strong> turns "generate and discard" into "generate, judge, repair": 99.8 % of tiles end up valid and assemble into foldable panels.</li>
-      <li><strong>Limits.</strong> Validity is geometric only — no thermal or hydraulic performance yet — and the topology is confined to five families.</li>
-      <li><strong>Next.</strong> Pseudo-3D (Hele-Shaw) CFD on the passing tiles → surrogate models for thermal resistance and pressure drop → surrogate-gradient guidance inside the denoising loop, so generation moves toward better-performing channels; then branched / looped families and a puncture-robustness objective.</li>
-    </ul>
-  </article>
-
-  <!-- 포스터 그림 (한국어) -->
-  <article class="rs-block reveal">
-    <div class="rs-head"><span class="rs-num">FIG</span><h4>Poster figures</h4><span class="sub">Korean, click to enlarge</span></div>
-    <div class="gallery">
-      <figure><img src="img/poster_framework.png" alt="Full pipeline diagram (Korean)" onclick="openLightbox(7)"><figcaption>Full pipeline — data → conditional diffusion → gates + repair → panel assembly</figcaption></figure>
-      <figure><img src="img/poster_repair.png" alt="Masked SDEdit repair process (Korean)" onclick="openLightbox(8)"><figcaption>Masked-SDEdit repair, step by step on one failed tile</figcaption></figure>
-      <figure><img src="img/poster_panels.png" alt="1x4 panels assembled from generated tiles (Korean)" onclick="openLightbox(9)"><figcaption>1 × 4 panels assembled from generated tiles, all five families</figcaption></figure>
-    </div>
-  </article>
-
-  <!-- 연구 일지 -->
-  <h3 class="sec-title reveal" style="font-size:1.6rem;margin-top:30px">Research log</h3>
-  <div class="sec-rule reveal"></div>
-  <div class="timeline">
-    <div class="tl-item reveal">
-      <div class="tl-date">Aug 2026</div>
-      <h3>Dataset generator and first diffusion model</h3>
-      <p>Parameterised serpentine channels sampled by Latin Hypercube, gate-checked and converted to SDFs (5,645 tiles);
-      first unconditional 256 × 256 DDPM. Switching the sampler and adding a volume-fraction correction took the
-      gate pass rate from 9 % to 62 % without retraining.</p>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-date">Sep 2026</div>
-      <h3>Width conditioning</h3>
-      <p>Channel-width map added as a condition; port positions and tile scale fixed as a lab convention so that
-      generated tiles can be joined.</p>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-date">Oct 2026</div>
-      <h3>Five families, gates, repair, assembly</h3>
-      <p>Five-family conditional model (10,000 tiles), per-family topology gates, masked-SDEdit repair (92.0 → 99.8 %),
-      1 × 4 panel assembly with seam inpainting, a 21-run boundary-weighted-loss sweep on the lab's 4-GPU server
-      (91.3 → 97.1 %), Blender renders of the deployable concept, and the start of a CFD collaboration.</p>
     </div>
   </div>
 </section>
@@ -633,10 +170,10 @@ footer{text-align:center;padding:34px;color:var(--ink-faint);font-size:.85rem}
   </div>
 </section>
 
-<footer>© 2026 An Donggyun — built with plain HTML, CSS &amp; JS · last updated Oct 30, 2026</footer>
+<footer>© 2026 An Donggyun — built with plain HTML, CSS &amp; JS · last updated Nov 9, 2026</footer>
 
 <!-- ==================== LIGHTBOX ==================== -->
-<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+<div class="lightbox" id="lightbox">
   <button class="lightbox-close" aria-label="Close" onclick="closeLightbox()">&times;</button>
   <button class="lightbox-nav lightbox-prev" aria-label="Previous" onclick="navLightbox(-1)">&#8249;</button>
   <img id="lightbox-img" src="" alt="">
@@ -644,83 +181,6 @@ footer{text-align:center;padding:34px;color:var(--ink-faint);font-size:.85rem}
   <button class="lightbox-nav lightbox-next" aria-label="Next" onclick="navLightbox(1)">&#8250;</button>
 </div>
 
-<script>
-/* ---------- mobile menu ---------- */
-const toggle=document.querySelector('.nav-toggle');
-const links=document.querySelector('.nav-links');
-toggle.addEventListener('click',()=>{
-  const open=links.classList.toggle('open');
-  toggle.setAttribute('aria-expanded',open);
-});
-links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
-
-/* ---------- scroll spy (active pill follows section) ---------- */
-const navAnchors=[...document.querySelectorAll('.nav-links a')];
-const sections=navAnchors.map(a=>document.querySelector(a.getAttribute('href')));
-const spy=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      navAnchors.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
-    }
-  });
-},{rootMargin:'-45% 0px -50% 0px'});
-sections.forEach(s=>s&&spy.observe(s));
-
-/* ---------- scroll reveal ---------- */
-const revealer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('in');revealer.unobserve(e.target);}
-  });
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>revealer.observe(el));
-
-/* ---------- copy email ---------- */
-function copyEmail(btn){
-  navigator.clipboard.writeText('ehdrbs123450@hanyang.ac.kr').then(()=>{
-    const hint=btn.querySelector('.copy-hint');
-    const orig=hint.textContent;
-    hint.textContent='copied!';
-    setTimeout(()=>hint.textContent=orig,1600);
-  });
-}
-
-/* ---------- lightbox ----------
-   [EDIT] 그림을 추가하면 여기 배열에 {src, cap} 을 한 줄 더 넣고,
-   <img onclick="openLightbox(번호)"> 로 연결하세요. */
-const lbImages=[
-  {src:"img/hero_zfold.jpg",      cap:"Z-fold deployable radiator between two solar arrays — concept render (Blender)"},
-  {src:"img/families.png",        cap:"Training data — five procedural families, 2,000 tiles each, 256 × 256 SDF"},
-  {src:"img/generated.png",       cap:"Tiles generated by the conditional diffusion model — family label + width map as condition"},
-  {src:"img/panel_1x4.png",       cap:"1 × 4 panel assembled from four generated serpentine tiles of the same width — tile borders are the fold lines"},
-  {src:"img/deploy_3d.jpg",       cap:"Foldable 1 × 4 radiator panel — 3D concept of the assembled tiles"},
-  {src:"img/passrate_en.png",     cap:"Gate pass rate per family — base model vs. boundary-weighted loss, 1,000 tiles per family"},
-  {src:"img/pairs_en.png",        cap:"Same seed, same width, same epochs — plain MSE fails, boundary-weighted loss passes"},
-  {src:"img/poster_framework.png",cap:"Full pipeline (poster figure, Korean): data → conditional diffusion → gates + repair → panel assembly"},
-  {src:"img/poster_repair.png",   cap:"Masked-SDEdit repair process on one failed serpentine tile (poster figure, Korean)"},
-  {src:"img/poster_panels.png",   cap:"1 × 4 panels assembled from generated tiles, all five families (poster figure, Korean)"},
-  {src:"img/sdf_demo.png",        cap:"Representation — binary mask vs. truncated signed-distance field; the zero level set is the channel boundary"}
-];
-let lbIndex=0;
-function openLightbox(i){
-  lbIndex=i;updateLightbox();
-  document.getElementById('lightbox').classList.add('open');
-}
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
-}
-function navLightbox(d){
-  lbIndex=(lbIndex+d+lbImages.length)%lbImages.length;updateLightbox();
-}
-function updateLightbox(){
-  document.getElementById('lightbox-img').src=lbImages[lbIndex].src;
-  document.getElementById('lightbox-caption').textContent=lbImages[lbIndex].cap;
-}
-document.addEventListener('keydown',e=>{
-  if(!document.getElementById('lightbox').classList.contains('open'))return;
-  if(e.key==='Escape')closeLightbox();
-  if(e.key==='ArrowLeft')navLightbox(-1);
-  if(e.key==='ArrowRight')navLightbox(1);
-});
-</script>
+<script src="js/site.js"></script>
 </body>
 </html>

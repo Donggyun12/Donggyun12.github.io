@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space Radiator Channels — An Donggyun</title>
+<meta name="description" content="Conditional diffusion generation and inpainting repair of flow-channel tiles for deployable orbital data-center radiators — with an interactive masked-SDEdit repair demo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<div class="nav-wrap">
+  <nav>
+    <a class="brand" href="../">
+      <span class="brand-mark">AD</span>An Donggyun
+      <span class="brand-divider" aria-hidden="true"></span>
+      <img class="brand-lab" src="../img/idealab_logo.png" alt="IDEA Lab, Hanyang University">
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links">
+      <li><a href="../">← Home</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#how">Method</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#log">Log</a></li>
+    </ul>
+  </nav>
+</div>
+
+<section id="top" style="padding-bottom:0">
+  <!-- ==================== 배너 ==================== -->
+  <article class="rs-banner">
+    <div class="research-badge">Ongoing research · IDEA Lab · poster, Oct 2026</div>
+    <img src="../img/banner_ai1.jpg" alt="Orbital data-center satellite above Earth — deployable radiator with generated cooling-channel tiles between two solar arrays" data-lb data-cap="Orbital data-center satellite above Earth — deployable radiator panels tiled with generated serpentine channels, between two solar arrays (Blender render)">
+    <div class="rs-banner-text">
+      <div class="rs-meta">IDEA Lab, Hanyang University ERICA · Aug 2026 – present</div>
+      <h1>Conditional Diffusion Generation and Inpainting Repair of Flow-Channel Tiles for Deployable Space Radiators</h1>
+      <p>MW-class orbital data centers can only reject heat by radiation, so they need
+      thousands of square metres of radiator launched folded and deployed as tiled panels.
+      The cooling channels inside those tiles set the radiator's thermal resistance,
+      pressure drop and mass — and every kilogram costs about $3,400 to launch.
+      I build the generative half of this design loop: a diffusion model conditioned on
+      channel <em>family</em> and <em>width</em>, geometric gates that judge every tile,
+      and a training-free inpainting repair that recovers failed tiles so they can be
+      joined into foldable panels.</p>
+      <div class="tag-row">
+        <span class="tag">Conditional DDPM</span><span class="tag">SDF Representation</span>
+        <span class="tag">Inpainting · SDEdit</span><span class="tag">Boundary-weighted Loss</span>
+        <span class="tag">PyTorch</span><span class="tag">Generative Design</span>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section style="padding-top:28px">
+
+  <!-- ==================== 체험 데모 (js/repair.js 의 initDemo): 탈락 6장 → Repair → 제자리에서 서서히 수리 ==================== -->
+  <article class="rs-block" id="demo">
+    <div class="rs-head"><span class="rs-num">TRY</span><h2>Repair the failed tiles</h2><span class="sub">masked SDEdit, step by step</span></div>
+
+    <div class="rgrid" id="repair-demo" data-base="demo/" data-state="idle">
+      <p class="rg-word fail" aria-live="polite">Fail</p>
+      <div class="rg-grid"></div>
+
+      <div class="tbar">
+        <div class="tbar-track">
+          <div class="tbar-pin"></div><div class="tbar-mark"></div>
+          <input class="tbar-input" type="range" min="0" max="999" step="1" value="0" disabled aria-label="Scrub through the denoising steps, t = 999 to 0">
+        </div>
+        <div class="tbar-labels"><span class="l0">t = 999 · noise</span><span class="l850">850</span><span class="l1">0 · clean</span></div>
+      </div>
+      <p class="phase" aria-live="polite"></p>
+      <div class="demo-controls">
+        <button class="btn btn-dark btn-lg" data-act="run" type="button" disabled>Loading frames…</button>
+        <button class="btn btn-ghost" data-act="reset" type="button" disabled>Reset</button>
+      </div>
+      <p class="demo-note">Dark bar = steps where everything outside the dashed boxes is held to the original (t = 999 → 850);
+      light bar = whole tile denoised together. Drag the bar to scrub. Each frame is the model's estimate of the finished tile
+      at that step, with its own noise estimate overlaid at reduced strength — replayed from the real sampling run
+      (DDIM, 100 steps, 8 candidates per tile, the first passing one shown), not recomputed in your browser.</p>
+    </div>
+  </article>
+
+  <!-- ==================== 01 WHY ==================== -->
+  <article class="rs-block reveal" id="why">
+    <div class="rs-head"><span class="rs-num">01</span><h2>Why</h2><span class="sub">the problem</span></div>
+    <ul>
+      <li><strong>Radiation is the only exit for heat in orbit.</strong> A megawatt-class data center needs on the order of 2,500 m² of radiator, so panels are built from many tiles, folded for launch and deployed in space.</li>
+      <li><strong>Channel geometry is the lever.</strong> Lower channel thermal resistance raises the radiator temperature, and radiator area scales with T⁻⁴; pressure drop sets pump power; a large area will be punctured by micrometeoroids, so the layout must stay connected when a branch is lost.</li>
+      <li><strong>Existing generative design fixes the topology.</strong> HeatGen-style methods describe fin shapes with Bézier control-point vectors, so the channel topology cannot change — and samples that fail a check are simply discarded.</li>
+      <li><strong>Two ideas in this work:</strong> ① a diffusion model <em>conditioned on channel family and width</em>, so tiles can be ordered to spec and joined; ② <em>repair</em> failed tiles by inpainting instead of discarding them.</li>
+    </ul>
+  </article>
+
+  <!-- ==================== 02 HOW ==================== -->
+  <article class="rs-block reveal" id="how">
+    <div class="rs-head"><span class="rs-num">02</span><h2>How</h2><span class="sub">the pipeline in four steps</span></div>
+    <div class="step-grid">
+
+      <div class="step">
+        <div class="step-head"><span class="n">1</span><h5>Training data</h5></div>
+        <img src="../img/families.png" alt="Five training families" data-lb data-cap="Training data — five procedural families, 2,000 tiles each, 256 × 256 SDF">
+        <img src="../img/sdf_demo.png" alt="Binary mask and its signed-distance field" data-lb data-cap="Representation — binary mask vs. truncated signed-distance field; the zero level set is the channel boundary">
+        <p>Five procedural generators — serpentine, parallel, pin-fin, spiral, web — produce
+        2,000 tiles each with channel widths of 7–21 px. Only shapes that pass the gates are kept,
+        and each is stored as a 256 × 256 truncated signed-distance field (SDF): the model learns a
+        smooth distance-to-wall image rather than a hard 0/1 mask, and the zero level set gives the
+        channel boundary back.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="n">2</span><h5>Conditional diffusion</h5></div>
+        <img src="../img/generated.png" alt="Tiles generated by the conditional diffusion model" data-lb data-cap="Tiles generated by the conditional diffusion model — family label + width map as condition">
+        <p>A DDPM U-Net (v-prediction, T = 1000, cosine schedule) is conditioned on a family label
+        and a channel-width map, with 10 % condition dropout. Sampling uses 100 DDIM steps;
+        changing the condition yields a new tile of the requested family and width.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="n">3</span><h5>Gates + repair</h5></div>
+        <div class="repair-strip">
+          <figure><img src="../img/repair_0.png" alt="Failed tile"><figcaption>generated tile<br>fails a gate</figcaption></figure>
+          <figure><img src="../img/repair_1.png" alt="Defect located"><figcaption>defect located from<br>skeleton endpoints</figcaption></figure>
+          <figure><img src="../img/repair_2.jpg" alt="Hole re-drawn from noise"><figcaption>hole re-drawn from noise,<br>outside held to original</figcaption></figure>
+          <figure><img src="../img/repair_3.png" alt="Repaired tile"><figcaption>repaired tile<br>passes re-judgement</figcaption></figure>
+        </div>
+        <p>Every generated tile is judged by the same gates as the training data — inlet→outlet
+        connectivity, ports, isolated islands, width ≥ 4 px, wall thickness, volume fraction and a
+        per-family topology check — plus a memorisation check (IoU ≥ 0.95 to any training tile).
+        A failed tile is not discarded: the defect is boxed, the box is re-drawn from pure noise while
+        the rest is held to the original until t = 850, then everything is denoised together so the
+        seam blends (<em>masked SDEdit</em>, 8 candidates, no extra training). <a href="#demo">Try it above ↑</a></p>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="n">4</span><h5>Panel assembly</h5></div>
+        <div class="assembly">
+          <img src="../img/panel_1x4.png" alt="1x4 panel assembled from four generated tiles" data-lb data-cap="1 × 4 panel assembled from four generated serpentine tiles of the same width — tile borders are the fold lines">
+          <img src="../img/deploy_3d.jpg" alt="Foldable 1x4 radiator panel, 3D concept" data-lb data-cap="Foldable 1 × 4 radiator panel — 3D concept of the assembled tiles">
+        </div>
+        <p>Tiles of the same width share port positions, so four of them join into a 1 × 4 panel
+        whose tile borders become the fold lines (hinges). Pairs of different width are bridged by
+        inpainting a strip across the joint (Blended diffusion with a soft mask). Panels are re-checked
+        with the same gates.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ==================== 03 RESULTS ==================== -->
+  <article class="rs-block reveal" id="results">
+    <div class="rs-head"><span class="rs-num">03</span><h2>Results</h2><span class="sub">what the numbers say so far</span></div>
+    <div class="stat-row">
+      <div class="stat"><div class="big">10,000</div><div class="lab">training tiles — 5 families × 2,000, all gate-passing</div></div>
+      <div class="stat"><div class="big">91.3 <small>→</small> 97.1 <small>%</small></div><div class="lab">gate pass rate, base model → boundary-weighted loss (1,000 tiles per family)</div></div>
+      <div class="stat"><div class="big">92.0 <small>→</small> 99.8 <small>%</small></div><div class="lab">pass rate after masked-SDEdit repair (640-tile evaluation set)</div></div>
+      <div class="stat"><div class="big">0 <small>px</small></div><div class="lab">seam offset on same-width 1 × 4 panels (7 of 7), no inpainting needed</div></div>
+    </div>
+    <div class="fig-grid">
+      <figure class="fig">
+        <img src="../img/passrate_en.png" alt="Gate pass rate per family" data-lb data-cap="Gate pass rate per family — base model vs. boundary-weighted loss, 1,000 tiles per family">
+        <figcaption>Gate pass rate per family. The base model already obeys both conditions; serpentine and spiral carry most failures. Weighting the loss near channel boundaries (w = 1 + 14·exp(−d²/2σ²), σ = 1 px, 15 extra epochs) lifts the total from 91.3 to 97.1 %.</figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../img/pairs_en.png" alt="Same-seed pairs: plain MSE fails, boundary-weighted passes" data-lb data-cap="Same seed, same width, same epochs — plain MSE fails, boundary-weighted loss passes">
+        <figcaption>Same seed, same width, same 50 epochs from scratch — only the loss differs. Red marks what the gates flagged. Over 5,000 tiles the plain-MSE model fails 790, the boundary-weighted one 188 (84.2 → 96.2 %).</figcaption>
+      </figure>
+    </div>
+    <ul>
+      <li><strong>Repair recovers what hole-filling cannot.</strong> Masked SDEdit fixes 98 % of the 51 failed tiles while changing only 5.6 % of the pixels outside the hole. Five hole-only inpainting baselines (Blended, RePaint, DDNM, DPS, CoPaint) stall at 57–67 % because for 17 tiles the fix lies <em>outside</em> the hole — masked SDEdit repairs all 17.</li>
+      <li><strong>Why releasing the outside matters.</strong> A channel layout is a topology: when a pass is broken, the right fix is often to re-route a U-turn or shift the neighbouring pass a few pixels. Methods that keep the outside fixed to the end can only fill the hole, so they reproduce the dead end; letting the outside move for the last 85 % of the steps lets it adjust (figure below, Korean labels).</li>
+      <li><strong>The weight's shape matters.</strong> Across a 21-run sweep, the peak height w<sub>b</sub> drives the pass rate while the width σ (and the epoch count) drives memorisation of training tiles; σ = 1 px keeps copies at the base-model level.</li>
+      <li><strong>Panels assemble.</strong> Same-width 1 × 4 panels need no inpainting; mixed-width joints bridged by inpainting are 100 % connected with at most 1 px kink.</li>
+    </ul>
+    <figure class="fig" style="margin-top:18px">
+      <img src="media/why_outside.png" alt="Same failed tile repaired by Blended (outside fixed) and masked SDEdit (outside released)" data-lb data-cap="Same failed tile, same hole: hole-only Blended diffusion keeps the dead end; masked SDEdit passes by shifting a few percent of the pixels outside the hole (poster figure, Korean)">
+      <figcaption>Same failed tile, same hole. ② hole-only Blended diffusion keeps the dead end; ③ masked SDEdit passes; ④ where it changed outside the hole — 4.7 % and 8.8 % of the outside pixels (Korean labels).</figcaption>
+    </figure>
+  </article>
+
+  <!-- ==================== VIDEO ==================== -->
+  <article class="rs-block reveal" id="video">
+    <div class="rs-head"><span class="rs-num">VID</span><h2>Repair, start to finish</h2><span class="sub">54 s, no sound</span></div>
+    <p>Six failed tiles from the evaluation set, zoomed in one by one: the defect is boxed, the box is filled
+    with noise, the model re-draws it (outside held until t = 850, then released), and the repaired tile drops
+    back into the grid.</p>
+    <div class="video-frame">
+      <video controls muted playsinline preload="none" poster="media/repair_showcase_poster.jpg">
+        <source src="media/repair_showcase.mp4" type="video/mp4">
+      </video>
+    </div>
+  </article>
+
+  <!-- ==================== 04 CONCLUSION / NEXT ==================== -->
+  <article class="rs-block reveal" id="next">
+    <div class="rs-head"><span class="rs-num">04</span><h2>Conclusion &amp; next</h2><span class="sub">generate → judge → repair</span></div>
+    <ul>
+      <li><strong>A family- and width-conditioned diffusion model plus a repair step</strong> turns "generate and discard" into "generate, judge, repair": 99.8 % of tiles end up valid and assemble into foldable panels.</li>
+      <li><strong>Limits.</strong> Validity is geometric only — no thermal or hydraulic performance yet — and the topology is confined to five families.</li>
+      <li><strong>Next.</strong> Pseudo-3D (Hele-Shaw) CFD on the passing tiles → surrogate models for thermal resistance and pressure drop → surrogate-gradient guidance inside the denoising loop, so generation moves toward better-performing channels; then branched / looped families and a puncture-robustness objective.</li>
+    </ul>
+  </article>
+
+  <!-- ==================== 포스터 그림 (한국어) ==================== -->
+  <article class="rs-block reveal" id="figures">
+    <div class="rs-head"><span class="rs-num">FIG</span><h2>Poster figures</h2><span class="sub">Korean, click to enlarge</span></div>
+    <div class="gallery">
+      <figure><img src="../img/poster_framework.png" alt="Full pipeline diagram (Korean)" data-lb data-cap="Full pipeline (poster figure, Korean): data → conditional diffusion → gates + repair → panel assembly"><figcaption>Full pipeline — data → conditional diffusion → gates + repair → panel assembly</figcaption></figure>
+      <figure><img src="../img/poster_repair.png" alt="Masked SDEdit repair process (Korean)" data-lb data-cap="Masked-SDEdit repair process on one failed serpentine tile (poster figure, Korean)"><figcaption>Masked-SDEdit repair, step by step on one failed tile</figcaption></figure>
+      <figure><img src="../img/poster_panels.png" alt="1x4 panels assembled from generated tiles (Korean)" data-lb data-cap="1 × 4 panels assembled from generated tiles, all five families (poster figure, Korean)"><figcaption>1 × 4 panels assembled from generated tiles, all five families</figcaption></figure>
+      <figure><img src="../img/deploy_3d.jpg" alt="Foldable radiator panel, 3D concept" data-lb data-cap="Foldable 1 × 4 radiator panel — 3D concept (Blender)"><figcaption>Foldable panel concept, rendered in Blender</figcaption></figure>
+    </div>
+  </article>
+
+  <!-- ==================== 연구 일지 ==================== -->
+  <div id="log" style="scroll-margin-top:100px">
+    <h3 class="sec-title reveal" style="font-size:1.6rem;margin-top:30px">Research log</h3>
+    <div class="sec-rule reveal"></div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-date">Aug 2026</div>
+        <h3>Dataset generator and first diffusion model</h3>
+        <p>Parameterised serpentine channels sampled by Latin Hypercube, gate-checked and converted to SDFs (5,645 tiles);
+        first unconditional 256 × 256 DDPM. Switching the sampler and adding a volume-fraction correction took the
+        gate pass rate from 9 % to 62 % without retraining.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-date">Sep 2026</div>
+        <h3>Width conditioning</h3>
+        <p>Channel-width map added as a condition; port positions and tile scale fixed as a lab convention so that
+        generated tiles can be joined.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-date">Oct 2026</div>
+        <h3>Five families, gates, repair, assembly · poster</h3>
+        <p>Five-family conditional model (10,000 tiles), per-family topology gates, masked-SDEdit repair (92.0 → 99.8 %),
+        1 × 4 panel assembly with seam inpainting, a 21-run boundary-weighted-loss sweep on the lab's 4-GPU server
+        (91.3 → 97.1 %), Blender renders of the deployable concept, and the start of a CFD collaboration.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-date">Late Oct – Nov 2026</div>
+        <h3>Why the repair works</h3>
+        <p>Took five training-free inpainting methods apart step by step on the same failed tile and showed that the
+        fixes masked SDEdit finds often lie outside the hole; then made the repair video and this interactive demo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><a href="../">← back to An Donggyun</a> · © 2026 · last updated Nov 9, 2026</footer>
+
+<!-- ==================== LIGHTBOX ==================== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" aria-label="Previous" onclick="navLightbox(-1)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+  <button class="lightbox-nav lightbox-next" aria-label="Next" onclick="navLightbox(1)">&#8250;</button>
+</div>
+
+<script src="../js/site.js"></script>
+<script src="../js/repair.js"></script>
+<script>Repair.initDemo(document.getElementById('repair-demo'));</script>
+</body>
+</html>
