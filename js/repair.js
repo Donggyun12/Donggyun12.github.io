@@ -1,7 +1,7 @@
 /* 마스크 SDEdit 수리 재생기 — 탈락 타일을 한 장씩 보여 주고, Repair 를 누르면 제자리에서 서서히 수리된다.
-   Next failed tile 을 누르면 다음 탈락 타일이 나온다 (아래 점 = 몇 번째 타일 · 고친 타일은 초록).
+   Next failed tile 을 누르면 다음 탈락 타일이 나온다 (아래 = 몇 번째 타일 · 고친 수; 12장 이하면 점으로, 고친 타일은 초록).
    브라우저에서 모델을 돌리지는 않는다 — 실제 샘플링(DDIM 100스텝) 때 저장한 스텝별 그림을 재생한다 (수리 영상과 같은 그림 규칙).
-   데이터: odc/demo/  (우주데이터센터 저장소의 분석도구/export_web_repair_grid.py 가 만든다)
+   데이터: odc/demo/  (우주데이터센터 저장소의 분석도구/record_repair_web.py 가 연구실 서버에서 만든다 — gen_500 탈락 200장 중 고친 198장)
      demo.json            프레임별 t · 바깥이 풀리는 프레임(release) · 타일별 계열·폭·탈락 사유·구멍 밖 변화율
      t<id>_frames.webp    프레임 격자 (한 칸 size px, cols 열). 0 = 원본, 1 = 점선 안을 노이즈로, 2.. = 스텝, 마지막 = 결과
      t<id>_before.png     프레임을 받는 동안 먼저 보일 원본
@@ -32,8 +32,8 @@ const Repair=(()=>{
     const sprites=new Map();
     const getSprite=t=>{if(!sprites.has(t.id))sprites.set(t.id,loadImg(`${base}t${t.id}_frames.webp`));return sprites.get(t.id);};
 
-    // 아래 점: 몇 번째 타일인지 · 고친 타일은 초록 (눌러서 바로 갈 수도 있다)
-    const dots=d.tiles.map((t,i)=>{
+    // 아래 점: 몇 번째 타일인지 · 고친 타일은 초록 (눌러서 바로 갈 수도 있다). 타일이 많으면(12장 넘게) 점 없이 숫자만
+    const dots=(total<=12?d.tiles:[]).map((t,i)=>{
       const b=document.createElement('button');b.type='button';b.className='rg-dot';
       b.setAttribute('aria-label',`Failed tile ${i+1} of ${total}: ${t.family}, channel width ${t.width} px`);
       b.addEventListener('click',()=>show(i));dotsEl.appendChild(b);return b;
@@ -42,6 +42,7 @@ const Repair=(()=>{
 
     const done=new Set();let idx=0,cur=null,sprite=null,pos=0,raf=0,state='idle',token=0;
     const pct=()=>(cur.changed_outside*100).toFixed(1);
+    const whole=()=>cur.changed_outside==null;          // 구멍이 타일 전체 = 바깥이 없음 (타일을 통째로 다시 그림)
     function blit(j,alpha){
       const col=j%d.cols,row=Math.floor(j/d.cols);
       ctx.globalAlpha=alpha;ctx.drawImage(sprite,col*S,row*S,S,S,0,0,cv.width,cv.height);
@@ -63,7 +64,7 @@ const Repair=(()=>{
           ?`<b>① t = 999 → 850 · outside held.</b> The box starts from noise. Outside it, the original tile is put back at every step, so the new channel has to fit its surroundings. <span class="t-now">t = ${Math.round(t)}</span>`
           :`<b>② t &lt; 850 · outside released.</b> The whole tile is now denoised together, so the seam blends in; channels just outside the box may shift a little. <span class="t-now">t = ${Math.round(t)}</span>`;
     }
-    function updCount(){count.textContent=`Tile ${idx+1} of ${total} · ${done.size} repaired`;}
+    function updCount(){count.textContent=`Failed tile ${idx+1} / ${total} · ${done.size} repaired`;}
     function setState(s){
       state=s;root.dataset.state=s;
       word.textContent=s==='idle'?'Fail':s==='done'?'Pass':'Masked SDEdit';
@@ -72,13 +73,15 @@ const Repair=(()=>{
       runBtn.className='btn btn-lg '+(s==='done'?'btn-ghost':'btn-dark');    // 다 고치면 다음 타일 버튼을 진하게
       nextBtn.className='btn btn-lg '+(s==='done'?'btn-dark':'btn-ghost');
       st.className='st '+(s==='done'?'ok':s==='idle'?'bad':'');
-      st.textContent=s==='done'?`✓ passes · ${pct()} % of outside pixels changed`:s==='idle'?`✕ ${cur.why.join(' · ')}`:'repairing…';
-      if(s==='idle')phase.innerHTML=`This generated <b>${cur.family}</b> tile failed the gates — its channel breaks inside the dashed box. Press <b>Repair</b>: the box is erased and re-drawn by the same diffusion model, with no extra training and no hand editing.`;
-      if(s==='done')phase.innerHTML=`<b>③ Passes</b> the same gates the training data passed. Only ${pct()} % of the pixels outside the box changed. Press <b>Next failed tile</b> for another one.`;
+      st.textContent=s==='done'?(whole()?'✓ passes · whole tile re-drawn':`✓ passes · ${pct()} % of outside pixels changed`):s==='idle'?`✕ ${cur.why.join(' · ')}`:'repairing…';
+      if(s==='idle')phase.innerHTML=`This generated <b>${cur.family}</b> tile failed the gates; the dashed box marks the region around the defect. Press <b>Repair</b>: the box is erased and re-drawn by the same diffusion model, with no extra training and no hand editing.`;
+      if(s==='done')phase.innerHTML=`<b>③ Passes</b> the same gates the training data passed. `+
+        (whole()?`Here the box covered the whole tile, so the entire tile was re-drawn.`:`Only ${pct()} % of the pixels outside the box changed.`)+
+        ` Press <b>Next failed tile</b> for another one.`;
     }
     function stop(){if(raf)cancelAnimationFrame(raf);raf=0;}
     function finish(){
-      setState('done');done.add(cur.id);dots[idx].classList.add('done');updCount();
+      setState('done');done.add(cur.id);if(dots[idx])dots[idx].classList.add('done');updCount();
     }
     function play(from){
       stop();let p=from,prev=performance.now();

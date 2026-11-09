@@ -63,7 +63,7 @@
   232,
   191,
   151,
-  110,
+  111,
   70,
   30,
   0,
@@ -73,69 +73,66 @@
  "t_release": 850,
  "tiles": [
   {
-   "id": 54,
+   "id": 2,
    "family": "serpentine",
    "width": 17,
+   "cand": 0,
    "why": [
-    "inlet–outlet broken",
-    "isolated island"
+    "dead-end stub",
+    "dead-end branch"
    ],
    "why_ko": [
-    "끊김",
-    "고립"
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
    ],
-   "pass_after": true,
-   "changed_outside": 0.0165
+   "changed_outside": 0.0229
   },
   {
-   "id": 42,
-   "family": "serpentine",
-   "width": 15,
-   "why": [
-    "inlet–outlet broken",
-    "isolated island"
-   ],
-   "why_ko": [
-    "끊김",
-    "고립"
-   ],
-   "pass_after": true,
-   "changed_outside": 0.034
-  },
-  {
-   "id": 377,
-   "family": "serpentine",
-   "width": 17,
-   "why": [
-    "inlet–outlet broken",
-    "isolated island"
-   ],
-   "why_ko": [
-    "끊김",
-    "고립"
-   ],
-   "pass_after": true,
-   "changed_outside": 0.0104
-  },
-  {
-   "id": 163,
-   "family": "serpentine",
+   "id": 1501,
+   "family": "spiral",
    "width": 13,
+   "cand": 0,
    "why": [
-    "inlet–outlet broken",
-    "isolated island"
+    "shortcut"
    ],
    "why_ko": [
-    "끊김",
-    "고립"
+    "G2 지름길(섬)"
    ],
-   "pass_after": true,
-   "changed_outside": 0.0182
+   "changed_outside": 0.0787
+  },
+  {
+   "id": 577,
+   "family": "parallel",
+   "width": 17,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0
+  },
+  {
+   "id": 2011,
+   "family": "web",
+   "width": 13,
+   "cand": 1,
+   "why": [
+    "volume fraction",
+    "cell count"
+   ],
+   "why_ko": [
+    "체적분율",
+    "G6 칸 수(섬)"
+   ],
+   "changed_outside": 0.0937
   },
   {
    "id": 7,
    "family": "serpentine",
    "width": 11,
+   "cand": 0,
    "why": [
     "inlet–outlet broken",
     "isolated island"
@@ -144,13 +141,2031 @@
     "끊김",
     "고립"
    ],
-   "pass_after": true,
-   "changed_outside": 0.0303
+   "changed_outside": 0.0329
+  },
+  {
+   "id": 1505,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0913
+  },
+  {
+   "id": 682,
+   "family": "parallel",
+   "width": 19,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": null
+  },
+  {
+   "id": 2052,
+   "family": "web",
+   "width": 11,
+   "cand": 0,
+   "why": [
+    "dead-end stub"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝"
+   ],
+   "changed_outside": 0.0763
+  },
+  {
+   "id": 35,
+   "family": "serpentine",
+   "width": 23,
+   "cand": 0,
+   "why": [
+    "too straight"
+   ],
+   "why_ko": [
+    "굴곡도"
+   ],
+   "changed_outside": 0.0295
+  },
+  {
+   "id": 1508,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0485
+  },
+  {
+   "id": 820,
+   "family": "parallel",
+   "width": 15,
+   "cand": 1,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0
+  },
+  {
+   "id": 2117,
+   "family": "web",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.1091
+  },
+  {
+   "id": 37,
+   "family": "serpentine",
+   "width": 23,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0153
+  },
+  {
+   "id": 1512,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0733
+  },
+  {
+   "id": 921,
+   "family": "parallel",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0
+  },
+  {
+   "id": 2134,
+   "family": "web",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝"
+   ],
+   "changed_outside": 0.1197
+  },
+  {
+   "id": 38,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.041
+  },
+  {
+   "id": 1514,
+   "family": "spiral",
+   "width": 7,
+   "cand": 1,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0427
+  },
+  {
+   "id": 977,
+   "family": "parallel",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0
+  },
+  {
+   "id": 2217,
+   "family": "web",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end stub"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝"
+   ],
+   "changed_outside": 0.0659
+  },
+  {
+   "id": 42,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0568
+  },
+  {
+   "id": 1518,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0349
+  },
+  {
+   "id": 2222,
+   "family": "web",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "dead-end stub"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝"
+   ],
+   "changed_outside": 0.0624
+  },
+  {
+   "id": 54,
+   "family": "serpentine",
+   "width": 17,
+   "cand": 2,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0192
+  },
+  {
+   "id": 1527,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0331
+  },
+  {
+   "id": 2267,
+   "family": "web",
+   "width": 11,
+   "cand": 0,
+   "why": [
+    "cell count"
+   ],
+   "why_ko": [
+    "G6 칸 수(섬)"
+   ],
+   "changed_outside": 0.0524
+  },
+  {
+   "id": 55,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0409
+  },
+  {
+   "id": 1533,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0871
+  },
+  {
+   "id": 2338,
+   "family": "web",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "isolated island",
+    "dead-end stub"
+   ],
+   "why_ko": [
+    "고립",
+    "G0 끊긴 끝"
+   ],
+   "changed_outside": 0.0881
+  },
+  {
+   "id": 57,
+   "family": "serpentine",
+   "width": 13,
+   "cand": 1,
+   "why": [
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.022
+  },
+  {
+   "id": 1540,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0936
+  },
+  {
+   "id": 2377,
+   "family": "web",
+   "width": 11,
+   "cand": 0,
+   "why": [
+    "dead-end stub"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝"
+   ],
+   "changed_outside": 0.0821
+  },
+  {
+   "id": 66,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0603
+  },
+  {
+   "id": 1542,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0379
+  },
+  {
+   "id": 2459,
+   "family": "web",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.1263
+  },
+  {
+   "id": 69,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0558
+  },
+  {
+   "id": 1544,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0574
+  },
+  {
+   "id": 80,
+   "family": "serpentine",
+   "width": 11,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0323
+  },
+  {
+   "id": 1545,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0614
+  },
+  {
+   "id": 83,
+   "family": "serpentine",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0342
+  },
+  {
+   "id": 1548,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0524
+  },
+  {
+   "id": 95,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0284
+  },
+  {
+   "id": 1549,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0762
+  },
+  {
+   "id": 99,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0327
+  },
+  {
+   "id": 1562,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0849
+  },
+  {
+   "id": 103,
+   "family": "serpentine",
+   "width": 11,
+   "cand": 4,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0424
+  },
+  {
+   "id": 1563,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.053
+  },
+  {
+   "id": 113,
+   "family": "serpentine",
+   "width": 17,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0166
+  },
+  {
+   "id": 1565,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0578
+  },
+  {
+   "id": 114,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 0,
+   "why": [
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0422
+  },
+  {
+   "id": 1566,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0292
+  },
+  {
+   "id": 121,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0397
+  },
+  {
+   "id": 1568,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0932
+  },
+  {
+   "id": 134,
+   "family": "serpentine",
+   "width": 23,
+   "cand": 2,
+   "why": [
+    "too straight"
+   ],
+   "why_ko": [
+    "굴곡도"
+   ],
+   "changed_outside": 0.0222
+  },
+  {
+   "id": 1576,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0745
+  },
+  {
+   "id": 149,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.069
+  },
+  {
+   "id": 1577,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0775
+  },
+  {
+   "id": 158,
+   "family": "serpentine",
+   "width": 17,
+   "cand": 1,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0574
+  },
+  {
+   "id": 1582,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0685
+  },
+  {
+   "id": 163,
+   "family": "serpentine",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0325
+  },
+  {
+   "id": 1588,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.1062
+  },
+  {
+   "id": 176,
+   "family": "serpentine",
+   "width": 23,
+   "cand": 1,
+   "why": [
+    "volume fraction"
+   ],
+   "why_ko": [
+    "체적분율"
+   ],
+   "changed_outside": 0.0232
+  },
+  {
+   "id": 1590,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0612
+  },
+  {
+   "id": 181,
+   "family": "serpentine",
+   "width": 17,
+   "cand": 4,
+   "why": [
+    "volume fraction"
+   ],
+   "why_ko": [
+    "체적분율"
+   ],
+   "changed_outside": 0.0346
+  },
+  {
+   "id": 1591,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0522
+  },
+  {
+   "id": 187,
+   "family": "serpentine",
+   "width": 11,
+   "cand": 2,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0574
+  },
+  {
+   "id": 1593,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "isolated island",
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "고립",
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0655
+  },
+  {
+   "id": 194,
+   "family": "serpentine",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.1107
+  },
+  {
+   "id": 1594,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0415
+  },
+  {
+   "id": 202,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 3,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0335
+  },
+  {
+   "id": 1595,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0629
+  },
+  {
+   "id": 216,
+   "family": "serpentine",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0358
+  },
+  {
+   "id": 1604,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0374
+  },
+  {
+   "id": 225,
+   "family": "serpentine",
+   "width": 13,
+   "cand": 2,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0518
+  },
+  {
+   "id": 1607,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.1391
+  },
+  {
+   "id": 230,
+   "family": "serpentine",
+   "width": 21,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0514
+  },
+  {
+   "id": 1612,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0531
+  },
+  {
+   "id": 239,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 1,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0452
+  },
+  {
+   "id": 1615,
+   "family": "spiral",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0691
+  },
+  {
+   "id": 249,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0508
+  },
+  {
+   "id": 1618,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0821
+  },
+  {
+   "id": 254,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 5,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0175
+  },
+  {
+   "id": 1621,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0811
+  },
+  {
+   "id": 256,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.049
+  },
+  {
+   "id": 1627,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0269
+  },
+  {
+   "id": 260,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 2,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0449
+  },
+  {
+   "id": 1631,
+   "family": "spiral",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0628
+  },
+  {
+   "id": 263,
+   "family": "serpentine",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0211
+  },
+  {
+   "id": 1637,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0432
+  },
+  {
+   "id": 268,
+   "family": "serpentine",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0239
+  },
+  {
+   "id": 1638,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0773
+  },
+  {
+   "id": 270,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0974
+  },
+  {
+   "id": 1643,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0485
+  },
+  {
+   "id": 281,
+   "family": "serpentine",
+   "width": 11,
+   "cand": 3,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0557
+  },
+  {
+   "id": 1645,
+   "family": "spiral",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0612
+  },
+  {
+   "id": 304,
+   "family": "serpentine",
+   "width": 11,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0185
+  },
+  {
+   "id": 1647,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "isolated island",
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "고립",
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0537
+  },
+  {
+   "id": 310,
+   "family": "serpentine",
+   "width": 21,
+   "cand": 0,
+   "why": [
+    "too straight"
+   ],
+   "why_ko": [
+    "굴곡도"
+   ],
+   "changed_outside": 0.013
+  },
+  {
+   "id": 1651,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0536
+  },
+  {
+   "id": 314,
+   "family": "serpentine",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0931
+  },
+  {
+   "id": 1664,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0686
+  },
+  {
+   "id": 326,
+   "family": "serpentine",
+   "width": 9,
+   "cand": 7,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0602
+  },
+  {
+   "id": 1665,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0671
+  },
+  {
+   "id": 336,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 2,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0426
+  },
+  {
+   "id": 1666,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0504
+  },
+  {
+   "id": 351,
+   "family": "serpentine",
+   "width": 11,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0208
+  },
+  {
+   "id": 1671,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.1191
+  },
+  {
+   "id": 356,
+   "family": "serpentine",
+   "width": 17,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.062
+  },
+  {
+   "id": 1672,
+   "family": "spiral",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.113
+  },
+  {
+   "id": 377,
+   "family": "serpentine",
+   "width": 17,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0298
+  },
+  {
+   "id": 1676,
+   "family": "spiral",
+   "width": 5,
+   "cand": 3,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0607
+  },
+  {
+   "id": 378,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 0,
+   "why": [
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0311
+  },
+  {
+   "id": 1677,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0587
+  },
+  {
+   "id": 382,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 1,
+   "why": [
+    "too straight"
+   ],
+   "why_ko": [
+    "굴곡도"
+   ],
+   "changed_outside": 0.0491
+  },
+  {
+   "id": 1695,
+   "family": "spiral",
+   "width": 5,
+   "cand": 2,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0741
+  },
+  {
+   "id": 386,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0383
+  },
+  {
+   "id": 1698,
+   "family": "spiral",
+   "width": 7,
+   "cand": 1,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.076
+  },
+  {
+   "id": 395,
+   "family": "serpentine",
+   "width": 17,
+   "cand": 2,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.021
+  },
+  {
+   "id": 1700,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "isolated island",
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "고립",
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.1874
+  },
+  {
+   "id": 405,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.1222
+  },
+  {
+   "id": 1704,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.037
+  },
+  {
+   "id": 408,
+   "family": "serpentine",
+   "width": 15,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.033
+  },
+  {
+   "id": 1710,
+   "family": "spiral",
+   "width": 5,
+   "cand": 2,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0693
+  },
+  {
+   "id": 446,
+   "family": "serpentine",
+   "width": 17,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0276
+  },
+  {
+   "id": 1711,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0444
+  },
+  {
+   "id": 447,
+   "family": "serpentine",
+   "width": 13,
+   "cand": 2,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0481
+  },
+  {
+   "id": 1713,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.1238
+  },
+  {
+   "id": 450,
+   "family": "serpentine",
+   "width": 7,
+   "cand": 2,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.1128
+  },
+  {
+   "id": 1714,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0628
+  },
+  {
+   "id": 453,
+   "family": "serpentine",
+   "width": 19,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0035
+  },
+  {
+   "id": 1715,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0689
+  },
+  {
+   "id": 475,
+   "family": "serpentine",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0774
+  },
+  {
+   "id": 1728,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.3508
+  },
+  {
+   "id": 1730,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.1702
+  },
+  {
+   "id": 1731,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0479
+  },
+  {
+   "id": 1736,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.044
+  },
+  {
+   "id": 1739,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0631
+  },
+  {
+   "id": 1743,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0696
+  },
+  {
+   "id": 1748,
+   "family": "spiral",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0657
+  },
+  {
+   "id": 1751,
+   "family": "spiral",
+   "width": 5,
+   "cand": 2,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.1043
+  },
+  {
+   "id": 1754,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0324
+  },
+  {
+   "id": 1762,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0692
+  },
+  {
+   "id": 1763,
+   "family": "spiral",
+   "width": 5,
+   "cand": 4,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.091
+  },
+  {
+   "id": 1777,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0694
+  },
+  {
+   "id": 1781,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0472
   },
   {
    "id": 1784,
    "family": "spiral",
    "width": 9,
+   "cand": 0,
    "why": [
     "inlet–outlet broken",
     "isolated island"
@@ -159,8 +2174,767 @@
     "끊김",
     "고립"
    ],
-   "pass_after": true,
-   "changed_outside": 0.0304
+   "changed_outside": 0.0443
+  },
+  {
+   "id": 1786,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.1275
+  },
+  {
+   "id": 1788,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0662
+  },
+  {
+   "id": 1791,
+   "family": "spiral",
+   "width": 13,
+   "cand": 1,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0417
+  },
+  {
+   "id": 1802,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.1938
+  },
+  {
+   "id": 1803,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.1934
+  },
+  {
+   "id": 1805,
+   "family": "spiral",
+   "width": 7,
+   "cand": 1,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0775
+  },
+  {
+   "id": 1806,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0378
+  },
+  {
+   "id": 1811,
+   "family": "spiral",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0403
+  },
+  {
+   "id": 1812,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0412
+  },
+  {
+   "id": 1813,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0883
+  },
+  {
+   "id": 1820,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0357
+  },
+  {
+   "id": 1823,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0857
+  },
+  {
+   "id": 1824,
+   "family": "spiral",
+   "width": 5,
+   "cand": 2,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0175
+  },
+  {
+   "id": 1827,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0664
+  },
+  {
+   "id": 1832,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "isolated island"
+   ],
+   "why_ko": [
+    "고립"
+   ],
+   "changed_outside": 0.0824
+  },
+  {
+   "id": 1833,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0801
+  },
+  {
+   "id": 1835,
+   "family": "spiral",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0668
+  },
+  {
+   "id": 1840,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.1954
+  },
+  {
+   "id": 1843,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0986
+  },
+  {
+   "id": 1844,
+   "family": "spiral",
+   "width": 9,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.1159
+  },
+  {
+   "id": 1847,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.1128
+  },
+  {
+   "id": 1848,
+   "family": "spiral",
+   "width": 7,
+   "cand": 1,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0687
+  },
+  {
+   "id": 1853,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0481
+  },
+  {
+   "id": 1860,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0504
+  },
+  {
+   "id": 1862,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0689
+  },
+  {
+   "id": 1866,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0408
+  },
+  {
+   "id": 1883,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.1161
+  },
+  {
+   "id": 1884,
+   "family": "spiral",
+   "width": 13,
+   "cand": 3,
+   "why": [
+    "wall too thin"
+   ],
+   "why_ko": [
+    "벽"
+   ],
+   "changed_outside": 0.0625
+  },
+  {
+   "id": 1893,
+   "family": "spiral",
+   "width": 5,
+   "cand": 2,
+   "why": [
+    "dead-end stub",
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0935
+  },
+  {
+   "id": 1895,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0856
+  },
+  {
+   "id": 1905,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.067
+  },
+  {
+   "id": 1908,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0676
+  },
+  {
+   "id": 1922,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.036
+  },
+  {
+   "id": 1927,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0635
+  },
+  {
+   "id": 1931,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0589
+  },
+  {
+   "id": 1937,
+   "family": "spiral",
+   "width": 7,
+   "cand": 1,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0472
+  },
+  {
+   "id": 1939,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0861
+  },
+  {
+   "id": 1940,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0441
+  },
+  {
+   "id": 1941,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0311
+  },
+  {
+   "id": 1949,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "isolated island",
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "고립",
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.0805
+  },
+  {
+   "id": 1950,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지"
+   ],
+   "changed_outside": 0.1031
+  },
+  {
+   "id": 1952,
+   "family": "spiral",
+   "width": 13,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.1161
+  },
+  {
+   "id": 1962,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0635
+  },
+  {
+   "id": 1963,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0648
+  },
+  {
+   "id": 1972,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0654
+  },
+  {
+   "id": 1979,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0783
+  },
+  {
+   "id": 1983,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end stub",
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.1333
+  },
+  {
+   "id": 1984,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0535
+  },
+  {
+   "id": 1988,
+   "family": "spiral",
+   "width": 7,
+   "cand": 0,
+   "why": [
+    "shortcut"
+   ],
+   "why_ko": [
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0371
+  },
+  {
+   "id": 1996,
+   "family": "spiral",
+   "width": 5,
+   "cand": 0,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.074
+  },
+  {
+   "id": 1997,
+   "family": "spiral",
+   "width": 5,
+   "cand": 2,
+   "why": [
+    "dead-end stub",
+    "dead-end branch",
+    "shortcut"
+   ],
+   "why_ko": [
+    "G0 끊긴 끝",
+    "G1 막다른 가지",
+    "G2 지름길(섬)"
+   ],
+   "changed_outside": 0.0554
+  },
+  {
+   "id": 1998,
+   "family": "spiral",
+   "width": 5,
+   "cand": 1,
+   "why": [
+    "inlet–outlet broken",
+    "isolated island"
+   ],
+   "why_ko": [
+    "끊김",
+    "고립"
+   ],
+   "changed_outside": 0.0435
   }
  ]
 }
