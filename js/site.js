@@ -70,3 +70,8 @@ if(lb){
     if(e.key==='ArrowRight')navLightbox(1);
   });
 }
+
+/* ---------- 자동 재생 영상: '움직임 줄이기' 를 켠 방문자에게는 멈춘 첫 장면 + 재생 버튼 ---------- */
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('video[autoplay]').forEach(v=>{v.removeAttribute('autoplay');v.pause();v.controls=true;});
+}
