@@ -61,8 +61,8 @@ const Repair=(()=>{
       mark.style.left=(100*(999-t)/999)+'%';scrub.value=Math.round(999-t);
       if(state!=='done'&&state!=='idle')
         phase.innerHTML=t>d.t_release
-          ?`<b>① t = 999 → 850 · outside held.</b> The box starts from noise. Outside it, the original tile is put back at every step, so the new channel has to fit its surroundings. <span class="t-now">t = ${Math.round(t)}</span>`
-          :`<b>② t &lt; 850 · outside released.</b> The whole tile is now denoised together, so the seam blends in; channels just outside the box may shift a little. <span class="t-now">t = ${Math.round(t)}</span>`;
+          ?`<b>① Outside held</b> — the box is re-drawn from noise to fit its surroundings. <span class="t-now">t = ${Math.round(t)}</span>`
+          :`<b>② Outside released</b> — the whole tile settles together. <span class="t-now">t = ${Math.round(t)}</span>`;
     }
     function updCount(){count.textContent=`Failed tile ${idx+1} / ${total} · ${done.size} repaired`;}
     function setState(s){
@@ -74,10 +74,8 @@ const Repair=(()=>{
       nextBtn.className='btn btn-lg '+(s==='done'?'btn-dark':'btn-ghost');
       st.className='st '+(s==='done'?'ok':s==='idle'?'bad':'');
       st.textContent=s==='done'?(whole()?'✓ passes · whole tile re-drawn':`✓ passes · ${pct()} % of outside pixels changed`):s==='idle'?`✕ ${cur.why.join(' · ')}`:'repairing…';
-      if(s==='idle')phase.innerHTML=`This generated <b>${cur.family}</b> tile failed the gates; the dashed box marks the region around the defect. Press <b>Repair</b>: the box is erased and re-drawn by the same diffusion model, with no extra training and no hand editing.`;
-      if(s==='done')phase.innerHTML=`<b>③ Passes</b> the same gates the training data passed. `+
-        (whole()?`Here the box covered the whole tile, so the entire tile was re-drawn.`:`Only ${pct()} % of the pixels outside the box changed.`)+
-        ` Press <b>Next failed tile</b> for another one.`;
+      if(s==='idle')phase.innerHTML=`This generated <b>${cur.family}</b> tile failed the gates. Press <b>Repair</b> to re-draw the dashed box.`;
+      if(s==='done')phase.innerHTML=`<b>③ Passes</b> — `+(whole()?`the whole tile was re-drawn.`:`only ${pct()} % of pixels outside the box changed.`);
     }
     function stop(){if(raf)cancelAnimationFrame(raf);raf=0;}
     function finish(){
