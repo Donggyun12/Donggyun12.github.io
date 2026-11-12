@@ -38,8 +38,7 @@
     <video class="rs-banner-video rs-banner-demo" src="media/pipeline_demo.mp4" poster="media/pipeline_demo_poster.jpg" autoplay muted loop playsinline controls preload="auto"
       aria-label="45-second demo: the diffusion model generates eight channel tiles from noise, each tile is checked, the failed ones are repaired, the tiles are joined into one strip, and the strip deploys as a radiator panel on the satellite"></video>
     <div class="rs-banner-text">
-      <div class="research-badge">Ongoing research · IDEA Lab · poster, Oct 2026</div>
-      <div class="rs-meta">IDEA Lab, Hanyang University ERICA · Aug 2026 – present</div>
+      <div class="research-badge">Ongoing project</div>
       <h1>Conditional Diffusion Generation and Inpainting Repair of Flow-Channel Tiles for Deployable Space Radiators</h1>
       <p>Orbital data centers can shed heat only by radiation, so they need huge radiators launched folded and
       deployed as tiled panels. I train a diffusion model that draws the cooling-channel tiles to a requested
@@ -57,7 +56,7 @@
 
   <!-- ==================== 체험 데모 (js/repair.js 의 initDemo): 탈락 타일 한 장씩 → Repair → 제자리에서 서서히 수리 → Next ==================== -->
   <article class="rs-block" id="demo">
-    <div class="rs-head"><span class="rs-num">TRY</span><h2>Repair a failed tile</h2><span class="sub">masked SDEdit, step by step</span></div>
+    <div class="rs-head"><span class="rs-num">TRY</span><h2>Repair a failed tile</h2></div>
 
     <div class="rgrid" id="repair-demo" data-base="demo/" data-state="idle">
       <p class="rg-word fail" aria-live="polite">Fail</p>
@@ -83,14 +82,12 @@
         <button class="btn btn-ghost btn-lg" data-act="next" type="button" disabled>Next failed tile →</button>
       </div>
       <div class="rg-dots" role="group" aria-label="Failed tiles"></div>
-      <p class="demo-note">83 real failures (broken or dead-ended channels) out of 2,500 generated tiles, replayed from the actual sampling run (not computed in your browser).
-      Dark bar: outside of the box held to the original (t = 999 → 850).</p>
     </div>
   </article>
 
   <!-- ==================== 01 WHY ==================== -->
   <article class="rs-block reveal" id="why">
-    <div class="rs-head"><span class="rs-num">01</span><h2>Why</h2><span class="sub">the problem</span></div>
+    <div class="rs-head"><span class="rs-num">01</span><h2>Why</h2></div>
     <ul>
       <li><strong>Heat leaves orbit only by radiation</strong> — a megawatt data center needs ~2,500 m² of folded, tiled radiator.</li>
       <li><strong>The channel layout is the lever</strong> — it sets thermal resistance, pump power and mass.</li>
@@ -100,7 +97,7 @@
 
   <!-- ==================== 02 HOW ==================== -->
   <article class="rs-block reveal" id="how">
-    <div class="rs-head"><span class="rs-num">02</span><h2>How</h2><span class="sub">four steps</span></div>
+    <div class="rs-head"><span class="rs-num">02</span><h2>How</h2></div>
     <div class="step-grid">
 
       <div class="step">
@@ -141,7 +138,7 @@
 
   <!-- ==================== 03 RESULTS ==================== -->
   <article class="rs-block reveal" id="results">
-    <div class="rs-head"><span class="rs-num">03</span><h2>Results</h2><span class="sub">so far</span></div>
+    <div class="rs-head"><span class="rs-num">03</span><h2>Results</h2></div>
     <div class="stat-row">
       <div class="stat"><div class="big">10,000</div><div class="lab">training tiles, 5 families</div></div>
       <div class="stat"><div class="big">91.3 <small>→</small> 97.1 <small>%</small></div><div class="lab">pass rate with boundary-weighted loss</div></div>
@@ -151,11 +148,9 @@
     <div class="fig-grid">
       <figure class="fig">
         <img src="../img/passrate_en.png" alt="Gate pass rate per family" data-lb data-cap="Gate pass rate per family — base model vs. boundary-weighted loss, 1,000 tiles per family">
-        <figcaption>Pass rate per family — base vs. boundary-weighted loss.</figcaption>
       </figure>
       <figure class="fig">
         <img src="../img/pairs_en.png" alt="Same-seed pairs: plain MSE fails, boundary-weighted passes" data-lb data-cap="Same seed, same width, same epochs — plain MSE fails, boundary-weighted loss passes">
-        <figcaption>Same seed, only the loss differs — plain loss fails, weighted passes.</figcaption>
       </figure>
     </div>
     <ul>
@@ -163,13 +158,12 @@
     </ul>
     <figure class="fig" style="margin-top:18px">
       <img src="media/why_outside.png" alt="Same failed tile repaired by Blended (outside fixed) and masked SDEdit (outside released)" data-lb data-cap="Same failed tile, same hole: hole-only Blended diffusion keeps the dead end; masked SDEdit passes by shifting a few percent of the pixels outside the hole (poster figure, Korean)">
-      <figcaption>Hole-only filling keeps the dead end; masked SDEdit passes by shifting a few pixels outside (Korean labels).</figcaption>
     </figure>
   </article>
 
   <!-- ==================== VIDEO ==================== -->
   <article class="rs-block reveal" id="video">
-    <div class="rs-head"><span class="rs-num">VID</span><h2>Repair, start to finish</h2><span class="sub">66 s, no sound</span></div>
+    <div class="rs-head"><span class="rs-num">VID</span><h2>Repair, start to finish</h2></div>
     <div class="video-frame">
       <video controls muted playsinline preload="none" poster="media/repair_showcase_poster.jpg">
         <source src="media/repair_showcase.mp4" type="video/mp4">
@@ -179,7 +173,7 @@
 
   <!-- ==================== 04 NEXT ==================== -->
   <article class="rs-block reveal" id="next">
-    <div class="rs-head"><span class="rs-num">04</span><h2>Next</h2><span class="sub">generate → judge → repair → optimise</span></div>
+    <div class="rs-head"><span class="rs-num">04</span><h2>Next</h2></div>
     <ul>
       <li><strong>Now:</strong> 99.8 % of tiles end up valid and assemble into foldable panels — validity is geometric only so far.</li>
       <li><strong>Next:</strong> CFD on the passing tiles → surrogate models → steer generation toward cooler, lower-pressure, puncture-robust channels.</li>

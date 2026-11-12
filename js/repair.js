@@ -64,7 +64,7 @@ const Repair=(()=>{
           ?`<b>① Outside held</b> — the box is re-drawn from noise to fit its surroundings. <span class="t-now">t = ${Math.round(t)}</span>`
           :`<b>② Outside released</b> — the whole tile settles together. <span class="t-now">t = ${Math.round(t)}</span>`;
     }
-    function updCount(){count.textContent=`Failed tile ${idx+1} / ${total} · ${done.size} repaired`;}
+    function updCount(){count.textContent='';}   // 몇 번째·몇 장 같은 숫자는 화면에 쓰지 않는다
     function setState(s){
       state=s;root.dataset.state=s;
       word.textContent=s==='idle'?'Fail':s==='done'?'Pass':'Masked SDEdit';
