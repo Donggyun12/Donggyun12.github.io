@@ -71,7 +71,7 @@ if(lb){
   });
 }
 
-/* ---------- 자동 재생 영상: '움직임 줄이기' 를 켠 방문자에게는 멈춘 첫 장면 + 재생 버튼 ---------- */
+/* ---------- 자동 재생 영상: '움직임 줄이기' 를 켠 방문자에게는 멈춘 첫 장면 + 재생 버튼 (조작 막대가 있는 영상은 방문자가 직접 멈출 수 있으니 그대로 재생) ---------- */
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){
-  document.querySelectorAll('video[autoplay]').forEach(v=>{v.removeAttribute('autoplay');v.pause();v.controls=true;});
+  document.querySelectorAll('video[autoplay]:not([controls])').forEach(v=>{v.removeAttribute('autoplay');v.pause();v.controls=true;});
 }
