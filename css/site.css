@@ -343,7 +343,9 @@ footer a{color:inherit}
   .rs-banner img{height:260px}
 }
 @media (max-width:640px){
-  #home{padding-top:110px}
+  #home{padding-top:96px;min-height:0;align-items:flex-start}   /* 폰: 빈 공간 없이 맨 위에서 시작 */
+  .hero-grid{gap:30px}
+  .proj-link{order:-1}                                   /* 폰: 진행 중인 연구 카드가 프로필보다 먼저 */
   .study-grid,.step-grid{grid-template-columns:1fr}
   .rs-block{padding:24px 20px 26px}
   .rs-banner-text{padding:22px 20px 24px}
